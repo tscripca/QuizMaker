@@ -5,12 +5,14 @@ namespace QuizMaker
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
-            QnAClass myQuestions = new QnAClass();
+           QnA.GetUserQuestions();
+            ExportToXML.StoreQuestions();
+           QnA.GetUserAnswers();
+            ExportToXML.StoreAnswers();
 
-            UIMethods.GetUserQnA(myQuestions);
+           
         }
     }
 }
