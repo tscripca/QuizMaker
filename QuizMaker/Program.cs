@@ -21,7 +21,7 @@ namespace QuizMaker
             }
 
             Console.WriteLine("Which one is the correct answer?");
-            string setCorrectAnswer = Console.ReadLine();
+            string correctAnswer = Console.ReadLine();
         }
     }
 }
