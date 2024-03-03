@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuizMaker;
 
 namespace QuizMaker
 {
-    internal class UIMethods
+    public class UIMethods
     {
-        public static void ClearScreen()
+        public static string GetQuestion()
         {
-            Console.Clear();
+            Console.WriteLine("Type question: ");
+            string gameQuestion = Console.ReadLine();
+            return gameQuestion;
         }
     }
 }
