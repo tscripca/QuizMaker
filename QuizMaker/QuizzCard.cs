@@ -9,10 +9,7 @@ namespace QuizMaker
 {
     public class QuizzCard
     {
-        public string UserQuestion { get; set; }
-        public string UserAnswer { get; set; }
-
-        
-        
+        public string UserQuestion;
+        public string UserAnswer;
     }
 }

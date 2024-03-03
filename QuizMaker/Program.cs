@@ -11,10 +11,17 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            UIMethods.GetQuestion();
-            LogicMethods.SetAnswer();
 
-            
+            QuizzCard quizzQuestion = new QuizzCard();
+            QuizzCard quizzAnswer = new QuizzCard();
+
+            quizzQuestion.UserQuestion = UIMethods.GetQuestion().ToString();
+            quizzAnswer.UserAnswer = LogicMethods.SetAnswer().ToString();            
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 

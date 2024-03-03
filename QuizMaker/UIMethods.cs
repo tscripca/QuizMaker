@@ -11,9 +11,11 @@ namespace QuizMaker
     {
         public static string GetQuestion()
         {
+            List<string> storeAllquestions = new List<string>();
             Console.WriteLine("Type question: ");
             string gameQuestion = Console.ReadLine();
-            return gameQuestion;
+            storeAllquestions.Add(gameQuestion);
+            return storeAllquestions.ToString();
         }
     }
 }

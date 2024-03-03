@@ -11,15 +11,17 @@ namespace QuizMaker
     {        
         public static string SetAnswer()
         {
-            string gameAnswer = "";
-            int maxQuestions = 2;
+            List<string> storeAllAnswers = new List<string>();
+            int maxQuestionsPerquizz = 4;
+            int maxAnswersPerQuestion = 2;
 
-            for (int i = 0; i <= maxQuestions; i++)
+            for (int answerCounter = 0; answerCounter <= maxAnswersPerQuestion; answerCounter++)
             {
                 Console.WriteLine("Answer: ");
-                gameAnswer = Console.ReadLine();                
+                string gameAnswer = Console.ReadLine();    
+                storeAllAnswers.Add(gameAnswer);
             }
-            return gameAnswer;            
+            return storeAllAnswers.ToString();            
         }
     }
 }
