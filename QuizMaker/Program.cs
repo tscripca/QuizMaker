@@ -10,20 +10,8 @@ namespace QuizMaker
     public class Program
     {
         static void Main(string[] args)
-        {
-
-            QuizzCard quizzQuestion = new QuizzCard();
-            QuizzCard quizzAnswer = new QuizzCard();
-
-            quizzQuestion.UserQuestion = UIMethods.GetQuestion().ToString();
-            quizzAnswer.UserAnswer = LogicMethods.SetAnswer().ToString();            
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-    }
-
-    
+        {          
+            LogicMethods.SetNumberOfQnA(); 
+        }        
+    }    
 }

@@ -9,19 +9,33 @@ namespace QuizMaker
 {
     public class LogicMethods
     {        
-        public static string SetAnswer()
+        public static string SetNumberOfQnA()
         {
-            List<string> storeAllAnswers = new List<string>();
-            int maxQuestionsPerquizz = 4;
-            int maxAnswersPerQuestion = 2;
+            List<string> storeAllQnAs = new List<string>();
+            Console.WriteLine("How many questions in total?: ");
+            int maxQuestionsPerquizz = Convert.ToInt32(Console.ReadLine()) - 1;
+            Console.WriteLine("How many possible answers per question?: ");
+            int maxAnswersPerQuestion = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            for (int answerCounter = 0; answerCounter <= maxAnswersPerQuestion; answerCounter++)
+            for (int i = 0; i <= maxQuestionsPerquizz; i++)
             {
-                Console.WriteLine("Answer: ");
-                string gameAnswer = Console.ReadLine();    
-                storeAllAnswers.Add(gameAnswer);
-            }
-            return storeAllAnswers.ToString();            
+                Console.WriteLine("Question: ");
+                string gameQuestion = Console.ReadLine();
+                storeAllQnAs.Add(gameQuestion);
+
+                for (int answerCounter = 0; answerCounter <= maxAnswersPerQuestion; answerCounter++)
+                {
+                    Console.WriteLine("Answer: ");
+                    string gameAnswer = Console.ReadLine();
+                    storeAllQnAs.Add(gameAnswer);
+                }
+            }            
+            return storeAllQnAs.ToString();            
+        }
+
+        public override string ToString()
+        {
+            return $"{LogicMethods.SetNumberOfQnA()}";
         }
     }
 }

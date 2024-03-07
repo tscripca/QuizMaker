@@ -8,8 +8,7 @@ using QuizMaker;
 namespace QuizMaker
 {
     public class QuizzCard
-    {
-        public string UserQuestion;
-        public string UserAnswer;
+    {        
+        QuizzCard QnA = new QuizzCard();
     }
 }
