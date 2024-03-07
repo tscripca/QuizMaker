@@ -11,7 +11,11 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {          
-            LogicMethods.SetNumberOfQnA(); 
+            QuizzCard QnACard = new QuizzCard();
+
+            QnACard.QuestionsAndAnswers = LogicMethods.SetNumberOfQnA();
+
+            Console.WriteLine($"{QnACard.QuestionsAndAnswers}"); 
         }        
     }    
 }
