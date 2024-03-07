@@ -17,7 +17,7 @@ namespace QuizMaker
             Console.WriteLine("How many possible answers per question?: ");
             int maxAnswersPerQuestion = Convert.ToInt32(Console.ReadLine()) - 1;
 
-            for (int i = 0; i <= maxQuestionsPerquizz; i++)
+            for (int questionCounter = 0; questionCounter <= maxQuestionsPerquizz; questionCounter++)
             {
                 Console.WriteLine("Question: ");
                 string gameQuestion = Console.ReadLine();
