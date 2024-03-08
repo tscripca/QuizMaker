@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuizMaker;
 
 namespace QuizMaker
 {
-    public class Program
+    internal class Constants
     {
-        static void Main(string[] args)
-        {          
-            
-        }        
-    }    
+        public const int BYPASS_INDEXING = 1;
+    }
 }

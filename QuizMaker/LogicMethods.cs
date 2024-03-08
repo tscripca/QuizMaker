@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,34 +9,27 @@ using QuizMaker;
 namespace QuizMaker
 {
     public class LogicMethods
-    {        
-        public static string SetNumberOfQnA()
+    {
+        public static List<QuizzCard> SetQnALoop()
         {
-            List<string> storeAllQnAs = new List<string>();
-            Console.WriteLine("How many questions in total?: ");
-            int maxQuestionsPerquizz = Convert.ToInt32(Console.ReadLine()) - 1;
-            Console.WriteLine("How many possible answers per question?: ");
-            int maxAnswersPerQuestion = Convert.ToInt32(Console.ReadLine()) - 1;
-
-            for (int questionCounter = 0; questionCounter <= maxQuestionsPerquizz; questionCounter++)
+            
+            int answersCounter;
+            int questionCounter;
+            int howManyquestionsInTotal = UIMethods.AskHowManyquestions();
+            int howManyAnswersPerQuestion = UIMethods.AskHowManyAnswers();
+            
+            for (questionCounter = 0; questionCounter <= howManyquestionsInTotal; questionCounter++)
             {
-                Console.WriteLine("Question: ");
-                string gameQuestion = Console.ReadLine();
-                storeAllQnAs.Add(gameQuestion);
-
-                for (int answerCounter = 0; answerCounter <= maxAnswersPerQuestion; answerCounter++)
+                UIMethods.DisplayQuestionsCounter(questionCounter);
+                UIMethods.SetQuestion();
+                for (answersCounter = 0; answersCounter <= howManyAnswersPerQuestion; answersCounter++)
                 {
-                    Console.WriteLine("Answer: ");
-                    string gameAnswer = Console.ReadLine();
-                    storeAllQnAs.Add(gameAnswer);
+                    string usertypesTheAnswer = UIMethods.SetAnswer();
+                    QuizzCard.Add(usertypesTheAnswer);
                 }
-            }            
-            return storeAllQnAs.ToString();            
-        }
+                UIMethods.ClearScreen();
+            }
 
-        public override string ToString()
-        {
-            return $"{LogicMethods.SetNumberOfQnA()}";
         }
     }
 }
