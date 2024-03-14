@@ -9,9 +9,7 @@ namespace QuizMaker
 {
     public class QuizzCard
     {
-        List<QuizzCard> storeAllQuestions = new List()
-            .Add(new (UIMethods.SetQuestion());
-
-        List<QuizzCard> storeAllAnswers = new List<QuizzCard>();
+        public string userQuestion;
+        public string userAnswer;
     }
 }

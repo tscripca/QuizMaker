@@ -10,26 +10,12 @@ namespace QuizMaker
 {
     public class LogicMethods
     {
-        public static List<QuizzCard> SetQnALoop()
+        public List<QuizzCard> AddQuestionsToTheList()
         {
-            
-            int answersCounter;
-            int questionCounter;
-            int howManyquestionsInTotal = UIMethods.AskHowManyquestions();
-            int howManyAnswersPerQuestion = UIMethods.AskHowManyAnswers();
-            
-            for (questionCounter = 0; questionCounter <= howManyquestionsInTotal; questionCounter++)
-            {
-                UIMethods.DisplayQuestionsCounter(questionCounter);
-                UIMethods.SetQuestion();
-                for (answersCounter = 0; answersCounter <= howManyAnswersPerQuestion; answersCounter++)
-                {
-                    string usertypesTheAnswer = UIMethods.SetAnswer();
-                    QuizzCard.Add(usertypesTheAnswer);
-                }
-                UIMethods.ClearScreen();
-            }
+            List<QuizzCard> myQuestionsList = new List<QuizzCard> ();
+            myQuestionsList.Add();
 
+            return myQuestionsList; 
         }
     }
 }

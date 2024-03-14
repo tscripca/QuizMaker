@@ -8,6 +8,6 @@ namespace QuizMaker
 {
     internal class Constants
     {
-        public const int BYPASS_INDEXING = 1;
+        
     }
 }

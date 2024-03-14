@@ -8,40 +8,19 @@ namespace QuizMaker
 {
     public class UIMethods
     {
-        public static int AskHowManyquestions()
+        public static string GetUserQuestion()
         {
-            Console.WriteLine("How many questions in total?: ");
-            int maxQuestionsPerquizz = Convert.ToInt32(Console.ReadLine()) - Constants.BYPASS_INDEXING;
-            return maxQuestionsPerquizz;
-        }
-        public static int AskHowManyAnswers()
-        {
-            Console.WriteLine("How many possible answers per question?: ");
-            int maxAnswersPerQuestion = Convert.ToInt32(Console.ReadLine()) - Constants.BYPASS_INDEXING;
-            return maxAnswersPerQuestion;
-        }
-        public static string SetQuestion()
-        {
-            Console.WriteLine("Type Question: ");
-            string gameQuestion = Console.ReadLine();
+            Console.WriteLine("Type question: ");
+            string userQuestion = Console.ReadLine();
 
-            return gameQuestion;
+            return userQuestion;
         }
-        public static string SetAnswer()
-        {
-            Console.WriteLine("Type Answer: ");
-            string gameAnswer = Console.ReadLine();
+        public static string SetUserAnswer()
+        {           
+            Console.WriteLine("Answer: ");
+            string userAnswer = Console.ReadLine();
 
-            return gameAnswer;
-        }
-        public static void ClearScreen()
-        {
-            Console.Clear();
-        }
-        public static int DisplayQuestionsCounter(int questionCounter)
-        {
-            Console.WriteLine($"Question number: {questionCounter + Constants.BYPASS_INDEXING}");
-            return questionCounter;
+            return userAnswer;
         }
     }
 }
