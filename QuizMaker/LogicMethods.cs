@@ -10,12 +10,6 @@ namespace QuizMaker
 {
     public class LogicMethods
     {
-        public List<QuizzCard> AddQuestionsToTheList()
-        {
-            List<QuizzCard> myQuestionsList = new List<QuizzCard> ();
-            myQuestionsList.Add();
-
-            return myQuestionsList; 
-        }
+        
     }
 }
