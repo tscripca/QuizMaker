@@ -32,14 +32,24 @@ namespace QuizMaker
                 Console.WriteLine("Correct answer?: ");
                 string correctAnswer = Console.ReadLine();
 
+               
+
                 UIMethods.ClearScreen();
             }
             return questionList.ToString() + answerList.ToString(); 
         }
 
         public XmlSerializer GetSerializer()
-        {
-            
+        {       
+            XmlSerializer newSerializer = new XmlSerializer(typeof(QuizzCard));
+            var relPath = @"newfile.txt";
+
+            using (FileStream file = File.Create(relPath))
+            {
+                newSerializer.Serialize(file, LogicMethods.LoopQnA());
+            }
+
+            return newSerializer;
         }
     }
 
