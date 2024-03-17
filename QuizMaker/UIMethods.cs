@@ -22,5 +22,10 @@ namespace QuizMaker
 
             return userAnswer;
         }
+
+        public static void ClearScreen()
+        {
+            Console.Clear();
+        }
     }
 }

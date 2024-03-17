@@ -11,8 +11,6 @@ namespace QuizMaker
     public class QuizzCard
     {
         public string userQuestion;
-        public string userAnswer;  
-    }
-
-    
+        public string userAnswer;       
+    }    
 }

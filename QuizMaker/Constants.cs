@@ -8,6 +8,6 @@ namespace QuizMaker
 {
     internal class Constants
     {
-        
+        public const int MAX_NUMBER_OF_QNA = 2;
     }
 }
