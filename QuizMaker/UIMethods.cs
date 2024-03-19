@@ -7,22 +7,7 @@ using System.Threading.Tasks;
 namespace QuizMaker
 {
     public class UIMethods
-    {
-        public static string GetUserQuestion()
-        {
-            Console.WriteLine("Type question: ");
-            string userQuestion = Console.ReadLine();
-
-            return userQuestion;
-        }
-        public static string SetUserAnswer()
-        {           
-            Console.WriteLine("Answer: ");
-            string userAnswer = Console.ReadLine();
-
-            return userAnswer;
-        }
-
+    {   
         public static void ClearScreen()
         {
             Console.Clear();

@@ -11,45 +11,43 @@ namespace QuizMaker
 {
     public class LogicMethods
     {
-        public static string LoopQnA()
+        public static string GetUserQuestion()
+        {            
+            Console.WriteLine("Type question: ");
+            string userQuestion = Console.ReadLine();
+
+            return userQuestion;
+        }
+        public static string SetUserAnswer()
+        {
+            Console.WriteLine("Answer: ");
+            string userAnswer = Console.ReadLine();
+
+            return userAnswer;
+        }
+        /// <summary>
+        /// This method should loop the user input and add it into a List of type QuizzCard
+        /// </summary>
+        /// <returns>Should return a QuizzCard type List</returns>
+        public static QuizzCard LoopQnA()
         {
             QuizzCard quizzCard = new QuizzCard();
+            List<QuizzCard> testList = new List<QuizzCard>();
 
-            List<QuizzCard> questionList = new List<QuizzCard>();
-            List<QuizzCard> answerList = new List<QuizzCard>();
-
-            for (int questionCount = 0; questionCount <= Constants.MAX_NUMBER_OF_QNA; questionCount++)
+            for (int questionLoop = 0; questionLoop <= Constants.MAX_NUMBER_OF_QNA; questionLoop++)
             {
-                quizzCard.userQuestion = UIMethods.GetUserQuestion();
-                questionList.Add(quizzCard);
-
-                for (int answerCount = 0; answerCount <= Constants.MAX_NUMBER_OF_QNA; answerCount++)
+                quizzCard.userQuestion = GetUserQuestion();
+                testList.Add(quizzCard);
+                
+                for (int answerLoop = 0; answerLoop <= Constants.MAX_NUMBER_OF_QNA; answerLoop++)
                 {
-                    quizzCard.userAnswer = UIMethods.SetUserAnswer();
-                    answerList.Add(quizzCard);
+                    quizzCard.userAnswers = SetUserAnswer();
+                    testList.Add(quizzCard);
                 }
-
-                Console.WriteLine("Correct answer?: ");
-                string correctAnswer = Console.ReadLine();
-
-               
-
                 UIMethods.ClearScreen();
             }
-            return questionList.ToString() + answerList.ToString(); 
-        }
 
-        public XmlSerializer GetSerializer()
-        {       
-            XmlSerializer newSerializer = new XmlSerializer(typeof(QuizzCard));
-            var relPath = @"newfile.txt";
-
-            using (FileStream file = File.Create(relPath))
-            {
-                newSerializer.Serialize(file, LogicMethods.LoopQnA());
-            }
-
-            return newSerializer;
+            return quizzCard;
         }
     }
 
