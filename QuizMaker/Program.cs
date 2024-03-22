@@ -15,8 +15,8 @@ namespace QuizMaker
         {
             QuizzCard newCard1 = new QuizzCard();
             List<QuizzCard> newList = new List<QuizzCard>();
-            
-            newCard1 = LogicMethods.LoopQnA();
+
+            newCard1 = LogicMethods.LoopQnA(newCard1);
             newList.Add(newCard1);
         }
     }

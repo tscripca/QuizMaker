@@ -9,39 +9,10 @@ using QuizMaker;
 
 namespace QuizMaker
 {
-    public class QuizzCard
+    class QuizzCard
     {
         public string userQuestion;
         public string userAnswers;
-        public int correctAnswer;
-
-        private string _Question;
-        private string _Answer; 
-
-        public string GetQuestion
-        {
-            get
-            {
-                LogicMethods.GetUserQuestion();
-                return GetQuestion;
-            }
-            set
-            {
-                LogicMethods.SetUserAnswer();
-            }
-        }
-
-        public string SetAnswer
-        {
-            get
-            {
-                LogicMethods.SetUserAnswer();
-                return _Answer;
-            }
-            set
-            {
-                _Answer = value;
-            }
-        }
+        public string correctAnswer;        
     }    
 }

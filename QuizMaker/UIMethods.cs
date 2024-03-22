@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuizMaker;
 
 namespace QuizMaker
 {
-    public class UIMethods
+    class UIMethods
     {   
         public static void ClearScreen()
         {

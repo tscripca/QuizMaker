@@ -7,18 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using QuizMaker;
+
 namespace QuizMaker
 {
-    public class LogicMethods
+    class LogicMethods
     {
-        public static string GetUserQuestion()
+        public string GetUserQuestion()
         {            
             Console.WriteLine("Type question: ");
             string userQuestion = Console.ReadLine();
 
             return userQuestion;
         }
-        public static string SetUserAnswer()
+        public string SetUserAnswer()
         {
             Console.WriteLine("Answer: ");
             string userAnswer = Console.ReadLine();
@@ -29,7 +30,7 @@ namespace QuizMaker
         /// This method should loop the user input and add it into a List of type QuizzCard
         /// </summary>
         /// <returns>Should return a QuizzCard type List</returns>
-        public static QuizzCard LoopQnA()
+        public QuizzCard LoopQnA(QuizzCard aRandomCard)
         {
             QuizzCard quizzCard = new QuizzCard();
             List<QuizzCard> testList = new List<QuizzCard>();
@@ -46,8 +47,14 @@ namespace QuizMaker
                 }
                 UIMethods.ClearScreen();
             }
-
             return quizzCard;
+        }
+
+        public List<QuizzCard> ImportDataList(List<QuizzCard> justACard)
+        {
+            justACard.Add(LoopQnA());
+
+            return justACard;
         }
     }
 
