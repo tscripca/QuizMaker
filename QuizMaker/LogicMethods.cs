@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using QuizMaker;
 
 namespace QuizMaker
-{
-    class LogicMethods
+{    public class LogicMethods
     {
-        public string GetUserQuestion()
-        {            
+        public string GetUserQuestion(QuizzCard userQuestion)
+        {
             Console.WriteLine("Type question: ");
-            string userQuestion = Console.ReadLine();
+            string myQuestion = Console.ReadLine();
 
-            return userQuestion;
+            return myQuestion;
         }
+
         public string SetUserAnswer()
         {
             Console.WriteLine("Answer: ");
@@ -26,37 +21,10 @@ namespace QuizMaker
 
             return userAnswer;
         }
-        /// <summary>
-        /// This method should loop the user input and add it into a List of type QuizzCard
-        /// </summary>
-        /// <returns>Should return a QuizzCard type List</returns>
-        public QuizzCard LoopQnA(QuizzCard aRandomCard)
+
+        public override string ToString()
         {
-            QuizzCard quizzCard = new QuizzCard();
-            List<QuizzCard> testList = new List<QuizzCard>();
-
-            for (int questionLoop = 0; questionLoop <= Constants.MAX_NUMBER_OF_QNA; questionLoop++)
-            {
-                quizzCard.userQuestion = GetUserQuestion();
-                testList.Add(quizzCard);
-                
-                for (int answerLoop = 0; answerLoop <= Constants.MAX_NUMBER_OF_QNA; answerLoop++)
-                {
-                    quizzCard.userAnswers = SetUserAnswer();
-                    testList.Add(quizzCard);
-                }
-                UIMethods.ClearScreen();
-            }
-            return quizzCard;
-        }
-
-        public List<QuizzCard> ImportDataList(List<QuizzCard> justACard)
-        {
-            justACard.Add(LoopQnA());
-
-            return justACard;
+            return $"{GetUserQuestion}, {SetUserAnswer}";
         }
     }
-
-   
 }

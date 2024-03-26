@@ -7,11 +7,5 @@ using QuizMaker;
 
 namespace QuizMaker
 {
-    class UIMethods
-    {   
-        public static void ClearScreen()
-        {
-            Console.Clear();
-        }
-    }
+    
 }

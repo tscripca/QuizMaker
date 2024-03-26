@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 using QuizMaker;
 
 namespace QuizMaker
@@ -13,11 +9,13 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            QuizzCard newCard1 = new QuizzCard();
-            List<QuizzCard> newList = new List<QuizzCard>();
+            QuizzCard card1 = new QuizzCard();
 
-            newCard1 = LogicMethods.LoopQnA(newCard1);
-            newList.Add(newCard1);
-        }
-    }
+            card1.userQuestion = "Capital of France";
+
+            Console.WriteLine($"Your question is: {card1}");
+
+            //LogicMethods.GetUserQuestion();
+        }        
+    }        
 }
