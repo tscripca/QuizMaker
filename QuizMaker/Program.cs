@@ -15,7 +15,7 @@ namespace QuizMaker
             QuizzCard answersCard2 = new QuizzCard();
             QuizzCard answersCard3 = new QuizzCard();
 
-            questionsCard.userQuestion = "Capital of France";
+            questionsCard.userQuestion = "Capital of France"; 
             answersCard1.userAnswer = "Paris";
             questionsCard.answersList.Add(answersCard1);
             answersCard2.userAnswer = "Rome";
