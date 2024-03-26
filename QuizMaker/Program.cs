@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using QuizMaker;
 
@@ -9,13 +10,26 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            QuizzCard card1 = new QuizzCard();
+            QuizzCard questionsCard = new QuizzCard();
+            QuizzCard answersCard1 = new QuizzCard();
+            QuizzCard answersCard2 = new QuizzCard();
+            QuizzCard answersCard3 = new QuizzCard();
 
-            card1.userQuestion = "Capital of France";
+            questionsCard.userQuestion = "Capital of France";
+            answersCard1.userAnswer = "Paris";
+            answersCard2.userAnswer = "Rome";
+            answersCard3.userAnswer = "Madrid";
 
-            Console.WriteLine($"Your question is: {card1}");
+            Console.WriteLine($"Your question is: {questionsCard}");
 
-            //LogicMethods.GetUserQuestion();
-        }        
+            questionsCard.answersList.Add(answersCard1);
+            questionsCard.answersList.Add(answersCard2);
+            questionsCard.answersList.Add(answersCard3);
+
+            Console.WriteLine($"Your list of answers is: {answersCard1}, {answersCard2}, {answersCard3}");
+
+            LogicMethods.GetUserQuestion();
+
+        }
     }        
 }

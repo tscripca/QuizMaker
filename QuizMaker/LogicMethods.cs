@@ -6,7 +6,7 @@ using QuizMaker;
 namespace QuizMaker
 {    public class LogicMethods
     {
-        public string GetUserQuestion(QuizzCard userQuestion)
+        public string GetUserQuestion()
         {
             Console.WriteLine("Type question: ");
             string myQuestion = Console.ReadLine();
@@ -20,11 +20,6 @@ namespace QuizMaker
             string userAnswer = Console.ReadLine();
 
             return userAnswer;
-        }
-
-        public override string ToString()
-        {
-            return $"{GetUserQuestion}, {SetUserAnswer}";
         }
     }
 }
