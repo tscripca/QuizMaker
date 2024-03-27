@@ -1,4 +1,5 @@
 ﻿using System;
+using QuizMaker;
 
 namespace QuizMaker
 {
@@ -20,9 +21,6 @@ namespace QuizMaker
         {
             Console.WriteLine("Answer: ");
             userAnswer = Console.ReadLine();
-
-            //answersList.Add();
-
             return userAnswer.ToString();
         }
 
