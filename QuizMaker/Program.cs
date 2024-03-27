@@ -12,21 +12,16 @@ namespace QuizMaker
         {
             QuizzCard questionsCard = new QuizzCard();
             QuizzCard answersCard1 = new QuizzCard();
-            QuizzCard answersCard2 = new QuizzCard();
-            QuizzCard answersCard3 = new QuizzCard();
+            List<QuizzCard> answersList = new List<QuizzCard> ();
 
-            questionsCard.userQuestion = "Capital of France"; 
-            answersCard1.userAnswer = "Paris";
-            questionsCard.answersList.Add(answersCard1);
-            answersCard2.userAnswer = "Rome";
-            questionsCard.answersList.Add(answersCard2);
-            answersCard3.userAnswer = "Madrid";
-            questionsCard.answersList.Add(answersCard3);
+
+            questionsCard.GetQuestion();
+            answersCard1.SetAnswer();
+            answersList.Add (answersCard1);            
 
             Console.WriteLine($"Your question is: {questionsCard}");
-            Console.WriteLine($"Your list of answers is: {answersCard1}, {answersCard2}, {answersCard3}");
+            Console.WriteLine($"Your list of answers is: {answersList}");
 
-            LogicMethods.GetUserQuestion();
 
         }
     }        
