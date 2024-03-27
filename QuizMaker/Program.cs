@@ -17,6 +17,7 @@ namespace QuizMaker
 
             Console.WriteLine($"Your question is: {questionsCard}");
             Console.WriteLine($"Your list of answers is: {listWithAnswers}");
+
         }
     }        
 }

@@ -7,21 +7,27 @@ namespace QuizMaker
     {
         public string userQuestion;
         public string userAnswer;
-        public List<QuizzCard> answersList;
+        public List<string> answersList = new List<string>();
         public int correctAnswer;
 
         public string GetQuestion()
         {
             Console.WriteLine("Type question: ");
-            userQuestion = Console.ReadLine();
-            return userQuestion.ToString();
+            userAnswer = Console.ReadLine();
+            return userAnswer;
         }
 
-        public string SetAnswer()
+        public List<string> SetAnswer()
         {
-            Console.WriteLine("Answer: ");
-            userAnswer = Console.ReadLine();
-            return userAnswer.ToString();
+            for(int answersCounter = 0; answersCounter <= 2; answersCounter++)
+            {
+                Console.WriteLine("Answer: ");
+                userAnswer = Console.ReadLine();
+
+                answersList.Add(userAnswer);
+            }          
+
+            return answersList;
         }
 
         public override string ToString()
