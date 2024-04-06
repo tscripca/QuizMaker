@@ -1,16 +1,20 @@
 ﻿using QuizMaker;
 using System;
+using System.Collections.Generic;
+
 namespace MyApp
 {
     public class Program
     {
         static void Main(string[] args)
         {
-            QnACard QnACard = new QnACard();
-            List<QnACard> gameQuestionsList = new List<QnACard>();
-            List<QnACard> gameAnswersList = new List<QnACard>();
-            QnACard.gameQuestion = UIMethods.GetQuestion();
-            QnACard.gameAnswer = Logic.SetAnswer();
+            QnACard myCard = new QnACard();
+            List<QnACard> myListOfAnswers = new List<QnACard>();
+
+            myCard.gameQuestion = UIMethods.GetQuestion();
+            myCard.answersList = Logic.SetAnswer(myListOfAnswers);
+
+            Console.WriteLine($"Your question is: {myCard.gameQuestion}");
         }
     }
 }

@@ -1,15 +1,22 @@
-﻿using QuizMaker;
+﻿using System.Collections.Generic;
+using QuizMaker;
 
 namespace QuizMaker
 {
     public class UIMethods
     {
-        public static string GetQuestion()
+        public string userQuestion;
+        public static string GetQuestion(QnACard userQuestion)
         {
             Console.WriteLine("Type question: ");
-            string userQuestion = Console.ReadLine();
-
+            userQuestion = Console.ReadLine();
             return userQuestion;
+
+            public override string ToString()
+        {
+            return $"{userQuestion}";
         }
+
+    }
     }
 }
