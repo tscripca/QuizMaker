@@ -5,7 +5,7 @@ namespace QuizMaker
 {
     public class Logic
     {
-        public static string SetAnswer(List<QnACard> answersList)
+        public static string SetAnswer()
         {
             List<string> answerList = new List<string> ();
 
