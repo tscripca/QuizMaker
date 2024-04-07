@@ -11,7 +11,7 @@ namespace QuizMaker
 
         public override string ToString()
         {
-            return $"{gameQuestion}";
+            return $"{gameQuestion} {answersList}";
         }
     }
 }

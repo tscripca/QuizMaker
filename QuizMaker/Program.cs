@@ -9,12 +9,10 @@ namespace MyApp
         static void Main(string[] args)
         {
             QnACard myCard = new QnACard();
-            List<QnACard> myListOfAnswers = new List<QnACard>();           
+            List<string> myListOfAnswers = new List<string>();           
 
             myCard.gameQuestion = UIMethods.GetQuestion();
-            myCard.answersList = Logic.SetAnswer();
-
-            myListOfAnswers.Add(myCard);
+            myListOfAnswers = Logic.SetAnswer();
 
             Console.WriteLine($"Your question is: {myCard.gameQuestion}");
             Console.WriteLine($"The list of answers: {myListOfAnswers}");

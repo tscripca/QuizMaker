@@ -10,7 +10,6 @@ namespace QuizMaker
             Console.WriteLine("Type question: ");
             string userQuestion = Console.ReadLine();
             return userQuestion;
-
         }
     }
 }
