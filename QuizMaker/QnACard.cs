@@ -1,4 +1,5 @@
 ﻿using QuizMaker;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace QuizMaker
@@ -11,7 +12,7 @@ namespace QuizMaker
 
         public override string ToString()
         {
-            return $"{gameQuestion} {answersList}";
+            return $"{gameQuestion}";
         }
     }
 }
