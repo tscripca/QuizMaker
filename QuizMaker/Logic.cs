@@ -1,26 +1,27 @@
-﻿using QuizMaker;
-using System.Collections.Generic;
-
-namespace QuizMaker
+﻿namespace QuizMaker
 {
     public class Logic
     {
         public static List<string> SetAnswer()
         {
-            List<string> answerList = new List<string>();
-
-            for(int answerCounter = 0; answerCounter <= 2; answerCounter++)
+            List<string> QnAList = new List<string>();
+            for (int answerCounter = 0; answerCounter <= 2; answerCounter++)
             {
                 Console.WriteLine("Answer: ");
                 string userAnswer = Console.ReadLine();
-                answerList.Add(userAnswer);
+                QnAList.Add(userAnswer);
             }
-            Console.WriteLine("List contains: ");
-            foreach(string input in answerList)
+            return QnAList;
+        }
+
+        public static int CheckCorrectAnswer(List<string> listToCheck)
+        {
+            int i = 0;
+            for(i = 0; i < listToCheck.Count; i++)
             {
-                Console.WriteLine($"{input}");
+                Console.WriteLine($"list contains {i} questions.");
             }
-            return answerList;
-        } 
+            return i;
+        }
     }
 }

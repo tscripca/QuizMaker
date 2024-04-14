@@ -1,18 +1,9 @@
-﻿using QuizMaker;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace QuizMaker
+﻿namespace QuizMaker
 {
     public class QnACard
     {
         public string gameQuestion;
-        public List<QnACard> answersList = new List<QnACard> ();
+        public List<string> answersList = new List<string>();
         public int correctAnswer;
-
-        public override string ToString()
-        {
-            return $"{gameQuestion}";
-        }
     }
 }
