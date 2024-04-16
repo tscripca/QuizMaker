@@ -2,7 +2,7 @@
 {
     public class UIMethods
     {
-        public static string GetQuestion()
+        public string GetQuestion()
         {
             Console.WriteLine("Type question: ");
             string userQuestion = Console.ReadLine();
