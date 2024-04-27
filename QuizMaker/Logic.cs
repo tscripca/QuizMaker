@@ -2,28 +2,20 @@
 {
     public class Logic
     {
-        public List<string> SetAnswer()
+        public static List<string> SetAnswer()
         {
-            List<string> QnAList = new List<string>();
+            List<string> myList = new List<string>();
+
             for (int answerCounter = 0; answerCounter <= 2; answerCounter++)
             {
                 Console.WriteLine("Answer: ");
                 string userAnswer = Console.ReadLine();
-                QnAList.Add(userAnswer);
+                myList.Add(userAnswer);
             }
-            return QnAList;
-        }
+            return myList;
+        }      
 
-        public int StoreCorrectAnswer(List<string> listTocheck)
-        {
-            Console.WriteLine("Select the correct answer(0, 1, 2): ");
-            int selectCorrectAnswer = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"Selected answer is: {listTocheck[selectCorrectAnswer]}");
-
-            return selectCorrectAnswer;
-        }
-
-        public int VerifyCorrectAnswer(int myAnswerCheck)
+        public static int VerifyCorrectAnswer(int myAnswerCheck)
         {
             Console.WriteLine("What is the correct answer?: ");
             int correctAnswer = Convert.ToInt32(Console.ReadLine());
