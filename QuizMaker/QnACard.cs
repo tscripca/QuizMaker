@@ -1,4 +1,6 @@
-﻿namespace QuizMaker
+﻿using QuizMaker;
+
+namespace QuizMaker
 {
     public class QnACard
     {
@@ -7,8 +9,8 @@
         public int correctAnswer;
 
         public override string ToString()
-        {            
-            return $"The list contains the following answers: {answersList}";
+        {
+            return $"The list contains: {answersList}";
         }
     }
 }

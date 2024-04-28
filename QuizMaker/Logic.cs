@@ -1,35 +1,21 @@
-﻿namespace QuizMaker
+﻿using QuizMaker;
+
+namespace QuizMaker
 {
     public class Logic
     {
-        public static List<string> SetAnswer()
+        public static List<string> GetUserAnswers()
         {
-            List<string> myList = new List<string>();
+            List<string> answersList = new List<string>();
 
             for (int answerCounter = 0; answerCounter <= 2; answerCounter++)
             {
                 Console.WriteLine("Answer: ");
                 string userAnswer = Console.ReadLine();
-                myList.Add(userAnswer);
+                answersList.Add(userAnswer);
             }
-            return myList;
-        }      
+            return answersList;
+        }   
 
-        public static int VerifyCorrectAnswer(int myAnswerCheck)
-        {
-            Console.WriteLine("What is the correct answer?: ");
-            int correctAnswer = Convert.ToInt32(Console.ReadLine());
-
-            if (correctAnswer == myAnswerCheck)
-            {
-                Console.WriteLine("CORRECT!");
-            }
-            else
-            {
-                Console.WriteLine("INCORRECT!");
-            }
-
-            return correctAnswer;
-        }
     }
 }
