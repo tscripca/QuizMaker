@@ -13,10 +13,10 @@ namespace QuizMaker
             return numberOfQuestions;
         }
 
-        public static int NoOfAnswersPerQuestion()
+        public static int NoOfAnswersPerQuestion(int answersPerQuestion)
         {
             Console.WriteLine("How many answers per each question?");
-            int answersPerQuestion = Convert.ToInt32(Console.ReadLine());
+            answersPerQuestion = Convert.ToInt32(Console.ReadLine());
 
             return answersPerQuestion;  
         }

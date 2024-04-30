@@ -7,10 +7,13 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            int noOfAnswers = UIMethods.NoOfAnswersPerQuestion();
+            int noOfAnswers = 0;
+            int noOfQuestions = UIMethods.NoOfQuestions();
+            UIMethods.NoOfAnswersPerQuestion(noOfAnswers);
+            
             var theMainQuizz = new List<QuizzTest>();
 
-            for (int i = 0; i < noOfAnswers; i++)
+            for (int i = 0; i < noOfQuestions; i++)
             {
                 var QnACard = new QuizzTest();
                 QnACard.gameQuestion = UIMethods.GetUserQuestion();
