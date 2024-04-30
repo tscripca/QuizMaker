@@ -7,23 +7,26 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            QnACard myCard1 = new();
+            int noOfAnswers = UIMethods.NoOfAnswersPerQuestion();
+            var theMainQuizz = new List<QuizzTest>();
 
-            for (int userQuestion = 0; userQuestion <= 2; userQuestion++)
+            for (int i = 0; i < noOfAnswers; i++)
             {
-                myCard1 = new QnACard();
-                myCard1.gameQuestion = UIMethods.GetUserQuestion();
-                myCard1.answersList = Logic.GetUserAnswers();                
+                var QnACard = new QuizzTest();
+                QnACard.gameQuestion = UIMethods.GetUserQuestion();
+                QnACard.answersList = UIMethods.GetUserAnswers();
+                theMainQuizz.Add(QnACard);
             }
 
-            XmlSerializer writer = new XmlSerializer(typeof(List<QnACard>));
+           XmlSerializer serializer = new XmlSerializer(typeof(QuizzTest));
 
-            var path = @"C:\Users\scrip\Desktop\QnaCard.xml";
+            var path = @"C:\Users\scrip\Desktop\QuizzTest.xml";
 
             using (FileStream file = File.Create(path))
             {
-                writer.Serialize(file, myCard1.answersList);
+                serializer.Serialize(file, theMainQuizz);
             }
-        }        
+
+        }
     }
 }

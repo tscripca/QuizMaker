@@ -9,7 +9,6 @@ namespace QuizMaker
 {
     public class Serializer
     {
-        
-        
+                
     }
 }
