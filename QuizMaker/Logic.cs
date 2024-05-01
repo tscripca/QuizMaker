@@ -8,8 +8,8 @@ namespace QuizMaker
         /// <summary>
         /// Exports a list of objects to local storage.
         /// </summary>
-        /// <param name="passTheList"></param>
-        /// <returns>A List of objects.</returns>
+        /// <param name="QnACardsList"></param>
+        /// <returns>A list of objects.</returns>
         public static List<QuizzTest> ExportToDrive(List<QuizzTest> QnACardsList)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzTest>));
