@@ -7,8 +7,7 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            var mainQuizzList = UIMethods.LoopTheQnACards();
-            Logic.ExportToDrive(mainQuizzList);
+            UIMethods.LoopTheQnACards();
         }
     }
 }

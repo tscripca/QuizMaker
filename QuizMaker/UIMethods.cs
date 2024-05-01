@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using QuizMaker;
+﻿using QuizMaker;
 using System.Xml.Serialization;
 
 namespace QuizMaker
@@ -63,8 +62,11 @@ namespace QuizMaker
             }
             return answersList;
         }
-
-        public static List<QuizzTest> LoopTheQnACards()
+        /// <summary>
+        /// Code block that deals with all user I/O.
+        /// </summary>
+        /// <returns>A list of objects.</returns>
+        public static void LoopTheQnACards()
         {
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
@@ -77,8 +79,7 @@ namespace QuizMaker
                 QnACard.answersList = GetUserAnswers(numberOfAnswersPerQuestion);
                 theMainQuizz.Add(QnACard);
             }               
-
-            return theMainQuizz;
+            Logic.ExportToDrive(theMainQuizz);
         }
     }
 }
