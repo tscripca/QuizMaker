@@ -13,7 +13,8 @@ namespace QuizMaker
         public static List<QuizzTest> ExportToDrive(List<QuizzTest> QnACardsList)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzTest>));
-            var path = @"C:\Users\scrip\Desktop\QuizzTest.xml";
+            string path = @"QuizzTest.xml";
+
             using (FileStream file = File.Create(path))
             {
                 serializer.Serialize(file, QnACardsList);
