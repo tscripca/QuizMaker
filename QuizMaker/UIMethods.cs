@@ -26,8 +26,7 @@ namespace QuizMaker
         /// <summary>
         /// Set the number of possible answers per each question.
         /// </summary>
-        /// <param name="answersPerQuestion"></param>
-        /// <returns>An integer</returns>
+        /// <returns>An integer.</returns>
         public static int SetNoOfAnswersPerQuestion()
         {
             Console.Write("Answers per each question: ");
@@ -63,18 +62,18 @@ namespace QuizMaker
             return answersList;
         }
         /// <summary>
-        /// Code block that deals with all user I/O.
+        /// Code block that deals with all user interaction.
         /// </summary>
-        /// <returns>A list of objects.</returns>
         public static void LoopTheQnACards()
         {
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
-            var theMainQuizz = new List<QuizzTest>();
+            var theMainQuizz = new List<QuizzGame>();
+            ClearScreen();
 
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
-                var QnACard = new QuizzTest();
+                var QnACard = new QuizzGame();
                 QnACard.gameQuestion = GetUserQuestion();
                 QnACard.answersList = GetUserAnswers(numberOfAnswersPerQuestion);
                 theMainQuizz.Add(QnACard);

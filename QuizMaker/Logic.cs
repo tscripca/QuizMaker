@@ -10,12 +10,11 @@ namespace QuizMaker
         /// </summary>
         /// <param name="QnACardsList"></param>
         /// <returns>A list of objects.</returns>
-        public static List<QuizzTest> ExportToDrive(List<QuizzTest> QnACardsList)
+        public static List<QuizzGame> ExportToDrive(List<QuizzGame> QnACardsList)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzTest>));
-            string path = @"QuizzTest.xml";
+            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
 
-            using (FileStream file = File.Create(path))
+            using (FileStream file = File.Create(Constants.savedPath))
             {
                 serializer.Serialize(file, QnACardsList);
             }
