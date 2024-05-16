@@ -1,5 +1,7 @@
 ﻿using QuizMaker;
+using System.Xml;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace QuizMaker
 {
@@ -14,11 +16,22 @@ namespace QuizMaker
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
 
-            using (FileStream file = File.Create(Constants.savedPath))
+            using (FileStream file = File.Create(Constants.SAVED_PATH))
             {
                 serializer.Serialize(file, QnACardsList);
             }
             return QnACardsList;
+        }
+
+        public static List<QuizzGame> ImportFromDrive(List<QuizzGame> loadedQnACardsList)
+        {
+            XmlSerializer deserializer = new XmlSerializer(typeof(List<QuizzGame>));
+
+            using (FileStream loadedFile = File.OpenRead(Constants.SAVED_PATH))
+            {
+                deserializer.Deserialize(loadedFile);
+            }
+            return loadedQnACardsList;
         }
              
     }

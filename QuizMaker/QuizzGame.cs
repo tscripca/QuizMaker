@@ -1,13 +1,12 @@
 ﻿using QuizMaker;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 namespace QuizMaker
 {
     public class QuizzGame
     {
-        //the question on each QnACard.
         public string gameQuestion;
-        //the list of answers on each QnACard.
         public List<string> answersList = new List<string>();
-        public int correctAnswer;        
+        public int correctAnswer;
     }
 }

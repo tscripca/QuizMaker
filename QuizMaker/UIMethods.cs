@@ -76,9 +76,20 @@ namespace QuizMaker
                 var QnACard = new QuizzGame();
                 QnACard.gameQuestion = GetUserQuestion();
                 QnACard.answersList = GetUserAnswers(numberOfAnswersPerQuestion);
+                QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
                 theMainQuizz.Add(QnACard);
             }               
             Logic.ExportToDrive(theMainQuizz);
+            Logic.ImportFromDrive(theMainQuizz);
+        }
+        public static int GetCorrectAnswer(List<string> listOfUserAnswers)
+        {
+            Console.Write("Correct answer?: ");
+            int correctAnswer = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer.");
+
+            return correctAnswer;
         }
     }
 }
