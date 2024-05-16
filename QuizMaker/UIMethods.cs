@@ -1,4 +1,5 @@
 ﻿using QuizMaker;
+using System.Net.Sockets;
 using System.Xml.Serialization;
 
 namespace QuizMaker
@@ -82,6 +83,11 @@ namespace QuizMaker
             Logic.ExportToDrive(theMainQuizz);
             Logic.ImportFromDrive(theMainQuizz);
         }
+        /// <summary>
+        /// Stores the correct answer.
+        /// </summary>
+        /// <param name="listOfUserAnswers"></param>
+        /// <returns>List index</returns>
         public static int GetCorrectAnswer(List<string> listOfUserAnswers)
         {
             Console.Write("Correct answer?: ");
@@ -90,6 +96,31 @@ namespace QuizMaker
             Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer.");
 
             return correctAnswer;
+        }
+        /// <summary>
+        /// Allows user to select a game mode.
+        /// </summary>
+        /// <returns>An Enum</returns>
+        public static SelectMode ChooseGameMode()
+        {
+            SelectMode gameModeSelector = SelectMode.invalid;
+            while (gameModeSelector == SelectMode.invalid)
+            {
+                Console.WriteLine("1 - build a quizz game");
+                Console.WriteLine("2 - play the quizz game");
+                ConsoleKeyInfo userChoice = Console.ReadKey();
+                int userSelectMode = userChoice.KeyChar;
+                ClearScreen();
+                switch (userSelectMode)
+                {
+                    case 1: gameModeSelector = SelectMode.buildQuizz; break;
+                    case 2: gameModeSelector = SelectMode.playQuizz; break;
+                    default:
+                        gameModeSelector = SelectMode.invalid;
+                        Console.WriteLine("I didn't get that, try again maybe?"); break;
+                }                 
+            }
+            return (SelectMode)gameModeSelector;
         }
     }
 }
