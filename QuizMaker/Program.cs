@@ -7,7 +7,7 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            UIMethods.LoopTheQnACards();            
+            UIMethods.DeployGame();          
         }
     }
 }

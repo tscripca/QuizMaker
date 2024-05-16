@@ -31,9 +31,9 @@ namespace QuizMaker
         public static int SetNoOfAnswersPerQuestion()
         {
             Console.Write("Answers per each question: ");
-            int answersPerQuestion = Convert.ToInt32(Console.ReadLine());            
+            int answersPerQuestion = Convert.ToInt32(Console.ReadLine());
 
-            return answersPerQuestion;  
+            return answersPerQuestion;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace QuizMaker
             List<string> answersList = new List<string>();
             Console.WriteLine("Answers: ");
             for (int answerCounter = 0; answerCounter < selectNoOfAnswers; answerCounter++)
-            {                
+            {
                 string userAnswer = Console.ReadLine();
                 answersList.Add(userAnswer);
             }
@@ -66,12 +66,11 @@ namespace QuizMaker
         /// Code block that deals with all user interaction.
         /// </summary>
         public static void LoopTheQnACards()
-        {
+        {  
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
             var theMainQuizz = new List<QuizzGame>();
             ClearScreen();
-
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
@@ -79,9 +78,8 @@ namespace QuizMaker
                 QnACard.answersList = GetUserAnswers(numberOfAnswersPerQuestion);
                 QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
                 theMainQuizz.Add(QnACard);
-            }               
+            }
             Logic.ExportToDrive(theMainQuizz);
-            Logic.ImportFromDrive(theMainQuizz);
         }
         /// <summary>
         /// Stores the correct answer.
@@ -101,7 +99,7 @@ namespace QuizMaker
         /// Allows user to select a game mode.
         /// </summary>
         /// <returns>An Enum</returns>
-        public static SelectMode ChooseGameMode()
+        public static SelectMode DeployGame()
         {
             SelectMode gameModeSelector = SelectMode.invalid;
             while (gameModeSelector == SelectMode.invalid)
@@ -113,14 +111,16 @@ namespace QuizMaker
                 ClearScreen();
                 switch (userSelectMode)
                 {
-                    case 1: gameModeSelector = SelectMode.buildQuizz; break;
+                    case 1: gameModeSelector = SelectMode.buildQuizz; LoopTheQnACards(); break;
                     case 2: gameModeSelector = SelectMode.playQuizz; break;
                     default:
                         gameModeSelector = SelectMode.invalid;
-                        Console.WriteLine("I didn't get that, try again maybe?"); break;
-                }                 
+                        Console.WriteLine("Invalid, try again!"); break;
+                }
             }
             return (SelectMode)gameModeSelector;
         }
+
+        
     }
 }
