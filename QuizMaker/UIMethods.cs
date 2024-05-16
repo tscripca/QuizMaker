@@ -107,12 +107,12 @@ namespace QuizMaker
                 Console.WriteLine("1 - build a quizz game");
                 Console.WriteLine("2 - play the quizz game");
                 ConsoleKeyInfo userChoice = Console.ReadKey();
-                int userSelectMode = userChoice.KeyChar;
+                char userSelectMode = userChoice.KeyChar;
                 ClearScreen();
                 switch (userSelectMode)
                 {
-                    case 1: gameModeSelector = SelectMode.buildQuizz; LoopTheQnACards(); break;
-                    case 2: gameModeSelector = SelectMode.playQuizz; break;
+                    case '1': gameModeSelector = SelectMode.buildQuizz; LoopTheQnACards(); break;
+                    case '2': gameModeSelector = SelectMode.playQuizz; break;
                     default:
                         gameModeSelector = SelectMode.invalid;
                         Console.WriteLine("Invalid, try again!"); break;
