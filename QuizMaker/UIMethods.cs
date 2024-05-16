@@ -105,7 +105,7 @@ namespace QuizMaker
             while (gameModeSelector == SelectMode.invalid)
             {
                 Console.WriteLine("1 - build a quizz game");
-                Console.WriteLine("2 - play the quizz game");
+                Console.WriteLine("2 - load a quizz game");
                 ConsoleKeyInfo userChoice = Console.ReadKey();
                 char userSelectMode = userChoice.KeyChar;
                 ClearScreen();
@@ -119,8 +119,6 @@ namespace QuizMaker
                 }
             }
             return (SelectMode)gameModeSelector;
-        }
-
-        
+        }        
     }
 }
