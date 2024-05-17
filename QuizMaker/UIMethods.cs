@@ -1,11 +1,17 @@
 ﻿using QuizMaker;
 using System.Net.Sockets;
 using System.Xml.Serialization;
-
 namespace QuizMaker
 {
     public class UIMethods
     {
+        /// <summary>
+        /// Wait for key press before continuing.
+        /// </summary>
+        public static void PressKey()
+        {
+            Console.ReadKey();
+        }
         /// <summary>
         /// Clears the screen.
         /// </summary>
@@ -19,23 +25,40 @@ namespace QuizMaker
         /// <returns>An integer</returns>
         public static int SetTotalNoOfQuestions()
         {
-            Console.Write("How many questions: ");
-            int numberOfQuestions = Convert.ToInt32(Console.ReadLine());
-
+            int numberOfQuestions = 0;
+            Console.WriteLine("How many questions?");
+            numberOfQuestions = UserInputValidation(numberOfQuestions);
             return numberOfQuestions;
+        }
+        public static int SetNoOfAnswersPerQuestion()
+        {
+            int answersPerQuestion = 0;
+            Console.WriteLine("Answers per each question?");
+            answersPerQuestion = UserInputValidation(answersPerQuestion);
+            return answersPerQuestion;
+        }
+        public static int UserInputValidation(int userDataIn)
+        {
+            bool validFormat = false;
+            while (!validFormat)
+            {
+                try
+                {
+                    userDataIn = Convert.ToInt32(Console.ReadLine());
+                    validFormat = true;
+                }
+                catch (Exception inputValidationFail)
+                {
+                    Console.WriteLine(inputValidationFail.Message);
+                    Console.Write("Try Again: ");
+                }
+            }
+            return userDataIn;
         }
         /// <summary>
         /// Set the number of possible answers per each question.
         /// </summary>
         /// <returns>An integer.</returns>
-        public static int SetNoOfAnswersPerQuestion()
-        {
-            Console.Write("Answers per each question: ");
-            int answersPerQuestion = Convert.ToInt32(Console.ReadLine());
-
-            return answersPerQuestion;
-        }
-
         /// <summary>
         /// Asks for user input
         /// </summary>
@@ -46,7 +69,6 @@ namespace QuizMaker
             string userQuestion = Console.ReadLine();
             return userQuestion;
         }
-
         /// <summary>
         /// Stores answers for each question in a list.
         /// </summary>
@@ -66,7 +88,7 @@ namespace QuizMaker
         /// Code block that deals with all user interaction.
         /// </summary>
         public static void LoopTheQnACards()
-        {  
+        {
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
             var theMainQuizz = new List<QuizzGame>();
@@ -90,9 +112,7 @@ namespace QuizMaker
         {
             Console.Write("Correct answer?: ");
             int correctAnswer = Convert.ToInt32(Console.ReadLine());
-
             Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer.");
-
             return correctAnswer;
         }
         /// <summary>
@@ -100,25 +120,34 @@ namespace QuizMaker
         /// </summary>
         /// <returns>An Enum</returns>
         public static SelectMode DeployGame()
-        {
-            SelectMode gameModeSelector = SelectMode.invalid;
-            while (gameModeSelector == SelectMode.invalid)
+        {            
+            bool validInput = false;
+            char userSelectMode = ' ';
+            SelectMode gameModeSelector = SelectMode.invalid;             
+            while(!validInput)
             {
-                Console.WriteLine("1 - build a quizz game");
-                Console.WriteLine("2 - load a quizz game");
-                ConsoleKeyInfo userChoice = Console.ReadKey();
-                char userSelectMode = userChoice.KeyChar;
-                ClearScreen();
-                switch (userSelectMode)
+                Console.WriteLine($"{Constants.BUILD_GAME} - build a quizz game");
+                Console.WriteLine($"{Constants.PLAY_GAME} - load a quizz game");
+                try
                 {
-                    case '1': gameModeSelector = SelectMode.buildQuizz; LoopTheQnACards(); break;
-                    case '2': gameModeSelector = SelectMode.playQuizz; break;
-                    default:
-                        gameModeSelector = SelectMode.invalid;
-                        Console.WriteLine("Invalid, try again!"); break;
+                    userSelectMode = Convert.ToChar(Console.ReadLine());
+                    validInput = true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("Try again.");
+                    PressKey();
+                    ClearScreen();
                 }
             }
+            switch (userSelectMode)
+            {
+                case Constants.BUILD_GAME: gameModeSelector = SelectMode.buildQuizz;
+                    LoopTheQnACards(); break;
+                case Constants.PLAY_GAME: gameModeSelector = SelectMode.playQuizz; break;
+            }
             return (SelectMode)gameModeSelector;
-        }        
+        }
     }
 }
