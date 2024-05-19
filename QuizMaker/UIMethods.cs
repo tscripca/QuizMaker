@@ -30,6 +30,10 @@ namespace QuizMaker
             numberOfQuestions = UserInputValidation(numberOfQuestions);
             return numberOfQuestions;
         }
+        /// <summary>
+        /// Sets the number of answers per question.
+        /// </summary>
+        /// <returns>An integer</returns>
         public static int SetNoOfAnswersPerQuestion()
         {
             int answersPerQuestion = 0;
@@ -65,7 +69,7 @@ namespace QuizMaker
         /// <returns>A string</returns>
         public static string GetUserQuestion()
         {
-            Console.Write("Question: ");
+            Console.WriteLine("Question: ");
             string userQuestion = Console.ReadLine();
             return userQuestion;
         }
@@ -112,19 +116,21 @@ namespace QuizMaker
         {
             Console.Write("Correct answer?: ");
             int correctAnswer = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer.");
+            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer." +
+                $"(Press any key to continue.)");
+            PressKey();
             return correctAnswer;
         }
         /// <summary>
         /// Allows user to select a game mode.
         /// </summary>
         /// <returns>An Enum</returns>
-        public static SelectMode DeployGame()
+        public static void DeployGame()
         {            
             bool validInput = false;
             char userSelectMode = ' ';
-            SelectMode gameModeSelector = SelectMode.invalid;             
-            while(!validInput)
+            GameMode gameModeSelector = GameMode.invalid;
+            while (!validInput)
             {
                 Console.WriteLine($"{Constants.BUILD_GAME} - build a quizz game");
                 Console.WriteLine($"{Constants.PLAY_GAME} - load a quizz game");
@@ -132,6 +138,7 @@ namespace QuizMaker
                 {
                     userSelectMode = Convert.ToChar(Console.ReadLine());
                     validInput = true;
+                    ClearScreen();
                 }
                 catch (Exception e)
                 {
@@ -140,14 +147,12 @@ namespace QuizMaker
                     PressKey();
                     ClearScreen();
                 }
-            }
+            }            
             switch (userSelectMode)
             {
-                case Constants.BUILD_GAME: gameModeSelector = SelectMode.buildQuizz;
-                    LoopTheQnACards(); break;
-                case Constants.PLAY_GAME: gameModeSelector = SelectMode.playQuizz; break;
+                case Constants.BUILD_GAME:gameModeSelector = GameMode.buildQuizz; LoopTheQnACards(); break;
+                case Constants.PLAY_GAME: gameModeSelector = GameMode.playQuizz; Logic.ImportFromDrive(); break;
             }
-            return (SelectMode)gameModeSelector;
         }
     }
 }
