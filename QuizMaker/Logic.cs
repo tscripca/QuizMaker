@@ -27,11 +27,12 @@ namespace QuizMaker
         /// <returns></returns>
         public static List<QuizzGame> ImportFromDrive()
         {
-            List<QuizzGame> importedQnAList = new List<QuizzGame>();
+            List<QuizzGame> importedQnAList = new();
             using (FileStream loadedFile = File.OpenRead(Constants.SAVED_PATH))
             {
                 var readDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                importedQnAList = (List<QuizzGame>)readDisk.Deserialize(loadedFile);
+                importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                
             }
             return importedQnAList;
         }             
