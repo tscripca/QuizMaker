@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace QuizMaker
 {
     public class UIMethods
-    {
+    {   
         /// <summary>
         /// Wait for key press before continuing.
         /// </summary>
@@ -96,7 +96,7 @@ namespace QuizMaker
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
             var theMainQuizz = new List<QuizzGame>();
-            ClearScreen();
+        ClearScreen();
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
@@ -121,22 +121,22 @@ namespace QuizMaker
             PressKey();
             return correctAnswer;
         }
+
         /// <summary>
-        /// Allows user to select a game mode.
+        /// Validates user input based on chosen option.
         /// </summary>
-        /// <returns>An Enum</returns>
-        public static void DeployGame()
-        {            
+        /// <returns>A char variable</returns>
+        public static char ValidateGameChoiceInput()
+        {
             bool validInput = false;
-            char userSelectMode = ' ';
-            GameMode gameModeSelector = GameMode.invalid;
+            char userSelection = ' ';
             while (!validInput)
             {
                 Console.WriteLine($"{Constants.BUILD_GAME} - build a quizz game");
                 Console.WriteLine($"{Constants.PLAY_GAME} - load a quizz game");
                 try
                 {
-                    userSelectMode = Convert.ToChar(Console.ReadLine());
+                    userSelection = Convert.ToChar(Console.ReadLine());
                     validInput = true;
                     ClearScreen();
                 }
@@ -147,7 +147,17 @@ namespace QuizMaker
                     PressKey();
                     ClearScreen();
                 }
-            }            
+            }
+            return userSelection;
+        }
+        /// <summary>
+        /// Allows user to select a game mode.
+        /// </summary>
+        /// <returns>An Enum</returns>
+        public static void DeployGame(char userSelectMode)
+        {
+            GameMode gameModeSelector;
+            userSelectMode = ValidateGameChoiceInput();
             switch (userSelectMode)
             {
                 case Constants.BUILD_GAME:gameModeSelector = GameMode.buildQuizz; LoopTheQnACards(); break;
