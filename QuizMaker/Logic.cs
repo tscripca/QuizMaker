@@ -7,9 +7,9 @@ using System.Security.Cryptography.X509Certificates;
 namespace QuizMaker
 {
     public class Logic
-    {
+    {        
         public XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
-
+        
         /// <summary>
         /// Saves the input content on the local drive.
         /// </summary>
@@ -27,16 +27,19 @@ namespace QuizMaker
         /// </summary>
         /// <param name="loadedQnACardsList"></param>
         /// <returns></returns>
-        public static List<QuizzGame> ImportFromDrive()
+        public static void ImportFromDrive()
         {
-            var importedQnAList = new List<QuizzGame>();
-
             using (FileStream loadedFile = File.OpenRead(Constants.SAVED_PATH))
             {
                 var readDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
-            }
-            return importedQnAList;
+                List<QuizzGame> importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                var quizzGame = new QuizzGame();
+
+                for (int i = 0; i < importedQnAList.Count; i++)
+                {
+                    Console.WriteLine(quizzGame.answersList[i]);
+                }
+            }            
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using QuizMaker;
 using System.Net.Sockets;
 using System.Xml.Serialization;
+
 namespace QuizMaker
 {
     public class UIMethods
-    {   
+    {  
         /// <summary>
         /// Wait for key press before continuing.
         /// </summary>
@@ -27,21 +28,27 @@ namespace QuizMaker
         {
             int numberOfQuestions = 0;
             Console.WriteLine("How many questions?");
-            numberOfQuestions = UserInputValidation(numberOfQuestions);
+            numberOfQuestions = ValidateNoOfQnA(numberOfQuestions);
             return numberOfQuestions;
         }
         /// <summary>
         /// Sets the number of answers per question.
         /// </summary>
         /// <returns>An integer</returns>
-        public static int SetNoOfAnswersPerQuestion()
+        public static int SetNoOfAnswersPerEachQuestion()
         {
             int answersPerQuestion = 0;
             Console.WriteLine("Answers per each question?");
-            answersPerQuestion = UserInputValidation(answersPerQuestion);
+            answersPerQuestion = ValidateNoOfQnA(answersPerQuestion);
             return answersPerQuestion;
         }
-        public static int UserInputValidation(int userDataIn)
+        /// <summary>
+        /// Asks the user to choose how many questions and how many choices per each question,
+        /// and then checks if the input value is an integer.
+        /// </summary>
+        /// <param name="userDataIn"></param>
+        /// <returns>An integer</returns>
+        public static int ValidateNoOfQnA(int userDataIn)
         {
             bool validFormat = false;
             while (!validFormat)
@@ -67,7 +74,7 @@ namespace QuizMaker
         /// Asks for user input
         /// </summary>
         /// <returns>A string</returns>
-        public static string GetUserQuestion()
+        public static string AskUserQuestion()
         {
             Console.WriteLine("Question: ");
             string userQuestion = Console.ReadLine();
@@ -77,7 +84,7 @@ namespace QuizMaker
         /// Stores answers for each question in a list.
         /// </summary>
         /// <returns>A list of strings.</returns>
-        public static List<string> GetUserAnswers(int selectNoOfAnswers)
+        public static List<string> SetUserAnswers(int selectNoOfAnswers)
         {
             List<string> answersList = new List<string>();
             Console.WriteLine("Answers: ");
@@ -94,14 +101,14 @@ namespace QuizMaker
         public static void LoopTheQnACards()
         {
             int numberOfQuestions = SetTotalNoOfQuestions();
-            int numberOfAnswersPerQuestion = SetNoOfAnswersPerQuestion();
+            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
             var theMainQuizz = new List<QuizzGame>();
-        ClearScreen();
+            ClearScreen();
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
-                QnACard.gameQuestion = GetUserQuestion();
-                QnACard.answersList = GetUserAnswers(numberOfAnswersPerQuestion);
+                QnACard.gameQuestion = AskUserQuestion();
+                QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
                 QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
                 theMainQuizz.Add(QnACard);
             }
@@ -111,17 +118,16 @@ namespace QuizMaker
         /// Stores the correct answer.
         /// </summary>
         /// <param name="listOfUserAnswers"></param>
-        /// <returns>List index</returns>
+        /// <returns>Integer value</returns>
         public static int GetCorrectAnswer(List<string> listOfUserAnswers)
         {
             Console.Write("Correct answer?: ");
             int correctAnswer = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as a correct answer." +
+            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as the correct answer." +
                 $"(Press any key to continue.)");
             PressKey();
             return correctAnswer;
         }
-
         /// <summary>
         /// Validates user input based on chosen option.
         /// </summary>
@@ -154,14 +160,13 @@ namespace QuizMaker
         /// Allows user to select a game mode.
         /// </summary>
         /// <returns>An Enum</returns>
-        public static void DeployGame(char userSelectMode)
+        public static void StartGame()
         {
-            GameMode gameModeSelector;
-            userSelectMode = ValidateGameChoiceInput();
+            char userSelectMode = ValidateGameChoiceInput();
             switch (userSelectMode)
             {
-                case Constants.BUILD_GAME:gameModeSelector = GameMode.buildQuizz; LoopTheQnACards(); break;
-                case Constants.PLAY_GAME: gameModeSelector = GameMode.playQuizz; Logic.ImportFromDrive(); break;
+                case Constants.BUILD_GAME: LoopTheQnACards(); break;
+                case Constants.PLAY_GAME: Logic.ImportFromDrive(); break;
             }
         }
     }
