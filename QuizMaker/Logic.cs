@@ -2,7 +2,6 @@
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 namespace QuizMaker
 {
@@ -33,13 +32,12 @@ namespace QuizMaker
             {
                 var readDisk = new XmlSerializer(typeof(List<QuizzGame>));
                 List<QuizzGame> importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
-                var quizzGame = new QuizzGame();
 
-                for (int i = 0; i < importedQnAList.Count; i++)
+                foreach (QuizzGame answerOption in importedQnAList)
                 {
-                    Console.WriteLine(quizzGame.answersList[i]);
+                    Console.WriteLine($"{answerOption}");
                 }
-            }            
-        }
+            }
+        }        
     }
 }

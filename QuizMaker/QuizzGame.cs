@@ -8,7 +8,11 @@ namespace QuizMaker
     {
         public string gameQuestion;
         public List<string> answersList = new List<string>();
-        public List<string> answersToDisplay = new List<string>();
         public int correctAnswer;
+
+        public override string ToString()
+        {
+            return $"{answersList}";
+        }
     }
 }
