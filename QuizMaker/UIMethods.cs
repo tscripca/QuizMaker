@@ -171,12 +171,12 @@ namespace QuizMaker
             foreach (QuizzGame answerOption in listOfQnAToPrint)
             {
                 Console.WriteLine($"Question: {answerOption.gameQuestion}");
-                foreach (string blahblah in answerOption.answersList)
+                foreach (string eachIndividualAnswer in answerOption.answersList)
                 {
-                    Console.WriteLine($"Choose: {blahblah}");
+                    Console.WriteLine($" {eachIndividualAnswer}");
                 }                
                 Console.Write("Correct answer: ");
-                int userSelectsAnswer = Convert.ToInt32(Console.ReadLine());
+                int userSelectsAnswer = Convert.ToInt32(Console.ReadLine());                
                 if (userSelectsAnswer == answerOption.correctAnswer)
                 {
                     Console.WriteLine("Correct");
