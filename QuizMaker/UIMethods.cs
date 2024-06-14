@@ -179,12 +179,13 @@ namespace QuizMaker
                 int userSelectsAnswer = Convert.ToInt32(Console.ReadLine());                
                 if (userSelectsAnswer == answerOption.correctAnswer)
                 {
-                    Console.WriteLine("Correct");
+                    Console.WriteLine("Correct!");
                 }
                 else
                 {
                     Console.WriteLine($"Sorry the correct answer was: {answerOption.correctAnswer}, {answerOption.answersList[answerOption.correctAnswer - Constants.MINUS_ONE]}");
                 }
+                Console.WriteLine();
             }
         }
     }
