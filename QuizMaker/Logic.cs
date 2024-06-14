@@ -2,13 +2,11 @@
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
-
 namespace QuizMaker
 {
     public class Logic
-    {        
+    {
         public XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
-        
         /// <summary>
         /// Saves the input content on the local drive.
         /// </summary>
@@ -26,18 +24,15 @@ namespace QuizMaker
         /// </summary>
         /// <param name="loadedQnACardsList"></param>
         /// <returns></returns>
-        public static void ImportFromDrive()
+        public static List<QuizzGame> ImportFromDrive()
         {
+            var importedQnAList = new List<QuizzGame>();
             using (FileStream loadedFile = File.OpenRead(Constants.SAVED_PATH))
             {
                 var readDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                List<QuizzGame> importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
-
-                foreach (QuizzGame answerOption in importedQnAList)
-                {
-                    Console.WriteLine($"{answerOption}");
-                }
+                importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
             }
-        }        
+            return importedQnAList;
+        }
     }
 }

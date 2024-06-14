@@ -5,7 +5,8 @@ using System.Xml.Serialization;
 namespace QuizMaker
 {
     public class UIMethods
-    {  
+    {
+
         /// <summary>
         /// Wait for key press before continuing.
         /// </summary>
@@ -66,10 +67,6 @@ namespace QuizMaker
             }
             return userDataIn;
         }
-        /// <summary>
-        /// Set the number of possible answers per each question.
-        /// </summary>
-        /// <returns>An integer.</returns>
         /// <summary>
         /// Asks for user input
         /// </summary>
@@ -166,7 +163,28 @@ namespace QuizMaker
             switch (userSelectMode)
             {
                 case Constants.BUILD_GAME: LoopTheQnACards(); break;
-                case Constants.PLAY_GAME: Logic.ImportFromDrive(); break;
+                case Constants.PLAY_GAME: PlayingTheGame(Logic.ImportFromDrive()); break;
+            }
+        }
+        public static void PlayingTheGame(List<QuizzGame> listOfQnAToPrint)
+        {
+            foreach (QuizzGame answerOption in listOfQnAToPrint)
+            {
+                Console.WriteLine($"Question: {answerOption.gameQuestion}");
+                foreach (string blahblah in answerOption.answersList)
+                {
+                    Console.WriteLine($"Choose: {blahblah}");
+                }                
+                Console.Write("Correct answer: ");
+                int userSelectsAnswer = Convert.ToInt32(Console.ReadLine());
+                if (userSelectsAnswer == answerOption.correctAnswer)
+                {
+                    Console.WriteLine("Correct");
+                }
+                else
+                {
+                    Console.WriteLine($"Sorry the correct answer was: {answerOption.correctAnswer}, {answerOption.answersList[answerOption.correctAnswer - Constants.MINUS_ONE]}");
+                }
             }
         }
     }
