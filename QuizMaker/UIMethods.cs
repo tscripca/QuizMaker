@@ -46,7 +46,7 @@ namespace QuizMaker
         /// Validates user input.
         /// </summary>
         /// <param name="userDataIn"></param>
-        /// <returns>An integer value</returns>
+        /// <returns>An integer value!</returns>
         public static int ValidateUserInput(int userDataIn)
         {
             bool validFormat = false;
