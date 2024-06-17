@@ -8,12 +8,32 @@ namespace QuizMaker
     {
         public string gameQuestion;
         public List<string> answersList = new List<string>();
-        public int correctAnswer;        
-
-        //public override string ToString()
-        //{
-        //    return $"{answersList}";
-        //}
-
+        public int correctAnswer;
+        private int _totalNumberOfQuestions;
+        private int _answersXQuestion;
+        public int TotalNumberOfQuestions
+        {
+            get
+            {
+                return _totalNumberOfQuestions;
+            }
+            set
+            {
+                UIMethods.ValidateUserInput(TotalNumberOfQuestions);
+                _totalNumberOfQuestions = value;
+            }
+        }
+        public int AnswersXQuestion
+        {
+            get
+            {
+                return _answersXQuestion;
+            }
+            set
+            {
+                UIMethods.ValidateUserInput(AnswersXQuestion);
+                _answersXQuestion = value;
+            }
+        }
     }
 }
