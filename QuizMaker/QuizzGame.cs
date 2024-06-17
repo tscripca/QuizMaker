@@ -36,4 +36,10 @@ namespace QuizMaker
             }
         }
     }
+    public enum GameMode
+    {
+        invalid,
+        buildQuizz,
+        playQuizz
+    }
 }

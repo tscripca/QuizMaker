@@ -7,10 +7,5 @@ using System.Threading.Tasks;
 
 namespace QuizMaker
 {
-    public enum GameMode
-    {
-        invalid,
-        buildQuizz,
-        playQuizz
-    }
+    
 }
