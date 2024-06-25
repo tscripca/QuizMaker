@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace QuizMaker
 {
-    internal class Constants
+    internal class Const
     {
         public const string SAVED_PATH = @"QuizzGame.xml";
         public const int MINUS_ONE = 1;

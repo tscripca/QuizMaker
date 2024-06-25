@@ -10,31 +10,30 @@ namespace QuizMaker
     {
         public XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
         /// <summary>
-        /// Saves the input content on the local drive.
+        /// Exports the object and saves it as an XML file.
         /// </summary>
-        /// <param name="QnACardsList"></param>
-        public static void ExportToDrive(List<QuizzGame> QnACardsList)
+        /// <param name="QnADeckToExport"></param>
+        public static void ExportToDrive(List<QuizzGame> QnADeckToExport)
         {
-            using (FileStream file = File.Create(Constants.SAVED_PATH))
+            using (FileStream file = File.Create(Const.SAVED_PATH))
             {
                 var writeDsk = new XmlSerializer(typeof(List<QuizzGame>));
-                writeDsk.Serialize(file, QnACardsList);
+                writeDsk.Serialize(file, QnADeckToExport);
             }
         }
         /// <summary>
-        /// Loads an XML file into an objects list.
+        /// Loads the XML file into an object list.
         /// </summary>
-        /// <param name="loadedQnACardsList"></param>
-        /// <returns></returns>
+        /// <returns>The object list</returns>
         public static List<QuizzGame> ImportFromDrive()
         {
-            var importedQnAList = new List<QuizzGame>();
-            using (FileStream loadedFile = File.OpenRead(Constants.SAVED_PATH))
+            var importedQnADeck = new List<QuizzGame>();
+            using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
             {
-                var readDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                importedQnAList = readDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
+                importedQnADeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
             }
-            return importedQnAList;
-        }
+            return importedQnADeck;
+        }        
     }
 }

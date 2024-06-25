@@ -4,6 +4,7 @@ using QuizMaker;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace QuizMaker
 {
@@ -98,17 +99,19 @@ namespace QuizMaker
         /// </summary>
         public static void BuildingTheGame()
         {
-            int numberOfQuestions = SetTotalNoOfQuestions();
-            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
             var theMainQuizz = new List<QuizzGame>();
+            int numberOfQuestions = SetTotalNoOfQuestions();
+            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();  
+            
             ClearScreen();
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
-                QnACard.gameQuestion = AskUserQuestion();
+                QnACard.quizzQuestion = AskUserQuestion();
                 QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
                 QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
                 theMainQuizz.Add(QnACard);
+                Console.WriteLine();
             }
             Logic.ExportToDrive(theMainQuizz);
         }
@@ -122,7 +125,7 @@ namespace QuizMaker
             int correctAnswer = 0;
             Console.Write("Correct answer?: ");
             correctAnswer = ValidateUserInput(correctAnswer);
-            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Constants.MINUS_ONE]} as the correct answer." +
+            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.MINUS_ONE]} as the correct answer." +
                 $"(Press any key to continue.)");
             PressKey();
             return correctAnswer;
@@ -137,8 +140,8 @@ namespace QuizMaker
             char userSelection = ' ';
             while (!validInput)
             {
-                Console.WriteLine($"{Constants.BUILD_GAME} - build a quizz game");
-                Console.WriteLine($"{Constants.PLAY_GAME} - load a quizz game");
+                Console.WriteLine($"{Const.BUILD_GAME} - build a quizz game");
+                Console.WriteLine($"{Const.PLAY_GAME} - load a quizz game");
                 try
                 {
                     userSelection = Convert.ToChar(Console.ReadLine());
@@ -164,36 +167,44 @@ namespace QuizMaker
             char userSelectMode = ValidateGameChoiceInput();
             switch (userSelectMode)
             {
-                case Constants.BUILD_GAME: BuildingTheGame(); break;
-                case Constants.PLAY_GAME: PlayingTheGame(Logic.ImportFromDrive()); break;
+                case Const.BUILD_GAME: BuildingTheGame(); break;
+                case Const.PLAY_GAME: PlayingTheGame(Logic.ImportFromDrive()); break;
             }
         }
         /// <summary>
         /// Code block where user is playing the game.
         /// </summary>
-        /// <param name="listOfQnAToPrint"></param>
-        public static void PlayingTheGame(List<QuizzGame> listOfQnAToPrint)
+        /// <param name="deckOfCards"></param>
+        public static void PlayingTheGame(List<QuizzGame> deckOfCards)
         {
-            foreach (QuizzGame answerOption in listOfQnAToPrint)
+            QuizzGame newStuff = new QuizzGame();
+            Random randomCardGenerator = new Random();
+            newStuff.listIndex = randomCardGenerator.Next(deckOfCards.Count);
+            var randomShit = deckOfCards[newStuff.listIndex];
+
+            int keepCountOfCorrectAnswers = 0;
+            foreach (QuizzGame gameCard in deckOfCards)
             {
-                int userSelectsAnswer = 0;
-                Console.WriteLine($"Question: {answerOption.gameQuestion}");
-                foreach (string eachIndividualAnswer in answerOption.answersList)
-                {
-                    Console.WriteLine($" {eachIndividualAnswer}");
+                int userSelectedAnswer = 0;
+                Console.WriteLine($"Question: {gameCard.quizzQuestion}");
+                foreach (string eachAnswerOption in gameCard.answersList)
+                {                    
+                    Console.WriteLine($" {eachAnswerOption}");
                 }                
                 Console.Write("Correct answer: ");
-                userSelectsAnswer = ValidateUserInput(userSelectsAnswer);
-                if (userSelectsAnswer == answerOption.correctAnswer)
+                userSelectedAnswer = ValidateUserInput(userSelectedAnswer);
+                if (userSelectedAnswer == gameCard.correctAnswer)
                 {
+                    keepCountOfCorrectAnswers++;
                     Console.WriteLine("Correct!");
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry the correct answer was: {answerOption.correctAnswer}, {answerOption.answersList[answerOption.correctAnswer - Constants.MINUS_ONE]}");
-                }
-                Console.WriteLine();
+                    Console.WriteLine($"Sorry the correct answer was: {gameCard.correctAnswer}, {gameCard.answersList[gameCard.correctAnswer - Const.MINUS_ONE]}");
+                }                
+                Console.WriteLine();                
             }
+            Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
         }
     }
 }

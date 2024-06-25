@@ -9,35 +9,10 @@ namespace QuizMaker
 {
     public class QuizzGame
     {
-        public string gameQuestion;
+        public string quizzQuestion;
         public List<string> answersList = new List<string>();
         public int correctAnswer;
-        private int _totalNumberOfQuestions;
-        private int _answersXQuestion;
-        public int TotalNumberOfQuestions
-        {
-            get
-            {
-                return _totalNumberOfQuestions;
-            }
-            set
-            {
-                UIMethods.ValidateUserInput(TotalNumberOfQuestions);
-                _totalNumberOfQuestions = value;
-            }
-        }
-        public int AnswersXQuestion
-        {
-            get
-            {
-                return _answersXQuestion;
-            }
-            set
-            {
-                UIMethods.ValidateUserInput(AnswersXQuestion);
-                _answersXQuestion = value;
-            }
-        }
+        public int listIndex;
     }
     public enum GameMode
     {
