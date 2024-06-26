@@ -39,6 +39,12 @@ namespace QuizMaker
             }
             return deckWithShuffledCards;
         }
+        /// <summary>
+        /// Shuffles a list of objects.
+        /// </summary>
+        /// <param name="randomCard"></param>
+        /// <param name="loadedFromDriveDeckOfCards"></param>
+        /// <param name="deckOfMixedCards"></param>
         public static void ShuffleCards(QuizzGame randomCard, List<QuizzGame> loadedFromDriveDeckOfCards, List<QuizzGame> deckOfMixedCards)
         {
             Random rng = new Random();
