@@ -26,43 +26,44 @@ namespace QuizMaker
         /// </summary>
         /// <returns>The object list</returns>
         public static List<QuizzGame> ImportFromDrive()
-        {
-            Random rng = new Random();
+        {            
             var randomPickedCard = new QuizzGame();
             var deckWithShuffledCards = new List<QuizzGame>();
             var importedQnADeck = new List<QuizzGame>();
-            int myIndex = 0;
 
             using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
             {
                 var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
                 importedQnADeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
-                bool allCardsAreInTheDeck = false;
-                while (!allCardsAreInTheDeck)
+                ShuffleCards(randomPickedCard, importedQnADeck, deckWithShuffledCards);
+            }
+            return deckWithShuffledCards;
+        }
+        public static void ShuffleCards(QuizzGame randomCard, List<QuizzGame> loadedFromDriveDeckOfCards, List<QuizzGame> deckOfMixedCards)
+        {
+            Random rng = new Random();
+            bool allCardsAreInTheDeck = false;
+            int myIndex = 0;
+            while (!allCardsAreInTheDeck)
+            {
+                for (int i = 0; i < loadedFromDriveDeckOfCards.Count; i++)
                 {
-                    for (int i = 0; i <= importedQnADeck.Count; i++)
+                    foreach (QuizzGame shuffledCard in loadedFromDriveDeckOfCards)
                     {
-                        foreach (QuizzGame shuffledCard in importedQnADeck)
+                        myIndex = rng.Next(loadedFromDriveDeckOfCards.Count);
+                        randomCard = loadedFromDriveDeckOfCards[myIndex];
+                        if (!deckOfMixedCards.Contains(randomCard))
                         {
-                            myIndex = rng.Next(4);
-                            randomPickedCard = importedQnADeck[myIndex];
-                            if (!deckWithShuffledCards.Contains(randomPickedCard))
-                            {
-                                deckWithShuffledCards.Add(randomPickedCard);
-                            }
-                            else
-                            {
-                                Console.WriteLine("This card is already in the deck.");
-                            }
+                            deckOfMixedCards.Add(randomCard);
                         }
                     }
-                    if(importedQnADeck.Count == deckWithShuffledCards.Count)
+                    if (loadedFromDriveDeckOfCards.Count == deckOfMixedCards.Count)
                     {
                         allCardsAreInTheDeck = true;
+                        break;
                     }
                 }
             }
-            return deckWithShuffledCards;
         }
     }
 }
