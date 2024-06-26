@@ -40,7 +40,7 @@ namespace QuizMaker
             return deckWithShuffledCards;
         }
         /// <summary>
-        /// Shuffles a list of objects.
+        /// Shuffles objects inside a list.
         /// </summary>
         /// <param name="randomCard"></param>
         /// <param name="loadedFromDriveDeckOfCards"></param>
