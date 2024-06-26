@@ -3,6 +3,7 @@ using System.IO;
 using QuizMaker;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -75,7 +76,7 @@ namespace QuizMaker
         /// <returns>A string</returns>
         public static string AskUserQuestion()
         {
-            Console.WriteLine("Question: ");
+            Console.Write("Question: ");
             string userQuestion = Console.ReadLine();
             return userQuestion;
         }
@@ -97,12 +98,12 @@ namespace QuizMaker
         /// <summary>
         /// Code block where user build the quizz game and saves it to the local drive.
         /// </summary>
-        public static void BuildingTheGame()
+        public static void BuildTheGame()
         {
             var theMainQuizz = new List<QuizzGame>();
             int numberOfQuestions = SetTotalNoOfQuestions();
-            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();  
-            
+            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
+
             ClearScreen();
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
@@ -125,7 +126,7 @@ namespace QuizMaker
             int correctAnswer = 0;
             Console.Write("Correct answer?: ");
             correctAnswer = ValidateUserInput(correctAnswer);
-            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.MINUS_ONE]} as the correct answer." +
+            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.INDEX_ONE]} as the correct answer." +
                 $"(Press any key to continue.)");
             PressKey();
             return correctAnswer;
@@ -167,30 +168,29 @@ namespace QuizMaker
             char userSelectMode = ValidateGameChoiceInput();
             switch (userSelectMode)
             {
-                case Const.BUILD_GAME: BuildingTheGame(); break;
-                case Const.PLAY_GAME: PlayingTheGame(Logic.ImportFromDrive()); break;
+                case Const.BUILD_GAME: BuildTheGame(); break;
+                case Const.PLAY_GAME: PlayTheGame(Logic.ImportFromDrive()); break;
             }
         }
         /// <summary>
         /// Code block where user is playing the game.
         /// </summary>
         /// <param name="deckOfCards"></param>
-        public static void PlayingTheGame(List<QuizzGame> deckOfCards)
+        public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
-            QuizzGame newStuff = new QuizzGame();
-            Random randomCardGenerator = new Random();
-            newStuff.listIndex = randomCardGenerator.Next(deckOfCards.Count);
-            var randomShit = deckOfCards[newStuff.listIndex];
-
             int keepCountOfCorrectAnswers = 0;
+            Console.WriteLine($"Your deck contains {deckOfCards.Count} cards now.");
+
             foreach (QuizzGame gameCard in deckOfCards)
-            {
+            {                     
                 int userSelectedAnswer = 0;
+                
+                Console.WriteLine();
                 Console.WriteLine($"Question: {gameCard.quizzQuestion}");
                 foreach (string eachAnswerOption in gameCard.answersList)
-                {                    
+                {
                     Console.WriteLine($" {eachAnswerOption}");
-                }                
+                }
                 Console.Write("Correct answer: ");
                 userSelectedAnswer = ValidateUserInput(userSelectedAnswer);
                 if (userSelectedAnswer == gameCard.correctAnswer)
@@ -200,9 +200,9 @@ namespace QuizMaker
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry the correct answer was: {gameCard.correctAnswer}, {gameCard.answersList[gameCard.correctAnswer - Const.MINUS_ONE]}");
-                }                
-                Console.WriteLine();                
+                    Console.WriteLine($"Sorry the correct answer was: {gameCard.correctAnswer}, {gameCard.answersList[gameCard.correctAnswer - Const.INDEX_ONE]}");
+                }
+                Console.WriteLine();
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
         }

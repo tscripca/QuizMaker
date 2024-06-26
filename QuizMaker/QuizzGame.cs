@@ -14,10 +14,4 @@ namespace QuizMaker
         public int correctAnswer;
         public int listIndex;
     }
-    public enum GameMode
-    {
-        invalid,
-        buildQuizz,
-        playQuizz
-    }
 }
