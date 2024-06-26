@@ -37,17 +37,28 @@ namespace QuizMaker
             {
                 var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
                 importedQnADeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
-                foreach (QuizzGame shuffledCard in importedQnADeck)
+                bool allCardsAreInTheDeck = false;
+                while (!allCardsAreInTheDeck)
                 {
-                    myIndex = rng.Next(4);
-                    randomPickedCard = importedQnADeck[myIndex];
-                    if (!deckWithShuffledCards.Contains(randomPickedCard))
+                    for (int i = 0; i <= importedQnADeck.Count; i++)
                     {
-                        deckWithShuffledCards.Add(randomPickedCard);
-                    } 
-                    else
+                        foreach (QuizzGame shuffledCard in importedQnADeck)
+                        {
+                            myIndex = rng.Next(4);
+                            randomPickedCard = importedQnADeck[myIndex];
+                            if (!deckWithShuffledCards.Contains(randomPickedCard))
+                            {
+                                deckWithShuffledCards.Add(randomPickedCard);
+                            }
+                            else
+                            {
+                                Console.WriteLine("This card is already in the deck.");
+                            }
+                        }
+                    }
+                    if(importedQnADeck.Count == deckWithShuffledCards.Count)
                     {
-                        Console.WriteLine("This card is already in the deck.");
+                        allCardsAreInTheDeck = true;
                     }
                 }
             }
