@@ -214,7 +214,7 @@ namespace QuizMaker
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
         }
         /// <summary>
-        /// Allows to go back and edit one of the game cards before exporting the whole game to drive.
+        /// Allows to edit a game card before adding it to the game.
         /// </summary>
         /// <returns>Boolean</returns>
         public static bool EditText()
