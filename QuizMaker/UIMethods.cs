@@ -12,6 +12,13 @@ namespace QuizMaker
     public class UIMethods
     {
         /// <summary>
+        /// Adds an empty line.
+        /// </summary>
+        public static void AddEmptyLine()
+        {
+            Console.WriteLine();
+        }
+        /// <summary>
         /// Wait for key press before continuing.
         /// </summary>
         public static void PressKey()
@@ -103,14 +110,18 @@ namespace QuizMaker
             var theMainQuizz = new List<QuizzGame>();
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
-
             ClearScreen();
             for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
-                QnACard.quizzQuestion = AskUserQuestion();
-                QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
-                QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
+                bool userWantstoEditText = true;
+                while (userWantstoEditText)
+                {
+                    QnACard.quizzQuestion = AskUserQuestion();
+                    QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
+                    QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
+                    userWantstoEditText = EditText();
+                }
                 theMainQuizz.Add(QnACard);
                 Console.WriteLine();
             }
@@ -135,41 +146,37 @@ namespace QuizMaker
         /// Validates user input based on chosen option.
         /// </summary>
         /// <returns>A char variable</returns>
-        public static char ValidateGameChoiceInput()
-        {
-            bool validInput = false;
-            char userSelection = ' ';
-            while (!validInput)
-            {
-                Console.WriteLine($"{Const.BUILD_GAME} - build a quizz game");
-                Console.WriteLine($"{Const.PLAY_GAME} - load a quizz game");
-                try
-                {
-                    userSelection = Convert.ToChar(Console.ReadLine());
-                    validInput = true;
-                    ClearScreen();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine("Try again.");
-                    PressKey();
-                    ClearScreen();
-                }
-            }
-            return userSelection;
-        }
+
         /// <summary>
-        /// Allows user to select a game mode.
+        /// Ask user to select a game mode.
         /// </summary>
         /// <returns>An Enum</returns>
         public static void StartGame()
         {
-            char userSelectMode = ValidateGameChoiceInput();
-            switch (userSelectMode)
+            GameMode myGameMode = GameMode.invalid;
+            while (myGameMode == GameMode.invalid)
             {
-                case Const.BUILD_GAME: BuildTheGame(); break;
-                case Const.PLAY_GAME: PlayTheGame(Logic.ImportFromDrive()); break;
+                Console.WriteLine("1 - Build game.");
+                Console.WriteLine("2 - Play game.");
+                char userSelectsGameMode = default;
+                try
+                {
+                    userSelectsGameMode = Convert.ToChar(Console.ReadLine());
+                    ClearScreen();
+                }
+                catch (Exception invalidFormat)
+                {
+                    Console.WriteLine(invalidFormat.Message);
+                    ClearScreen();
+                }
+
+                // Console.WriteLine();
+                switch (userSelectsGameMode)
+                {
+                    case '1': myGameMode = GameMode.build; BuildTheGame(); break;
+                    case '2': myGameMode = GameMode.play; PlayTheGame(Logic.ImportFromDrive()); break;
+                    default: myGameMode = GameMode.invalid; Console.WriteLine("Try again!"); break;
+                }
             }
         }
         /// <summary>
@@ -179,12 +186,12 @@ namespace QuizMaker
         public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
             int keepCountOfCorrectAnswers = 0;
-            Console.WriteLine($"Your deck contains {deckOfCards.Count} cards now.");
+            Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
 
             foreach (QuizzGame gameCard in deckOfCards)
-            {                     
+            {
                 int userSelectedAnswer = 0;
-                
+
                 Console.WriteLine();
                 Console.WriteLine($"Question: {gameCard.quizzQuestion}");
                 foreach (string eachAnswerOption in gameCard.answersList)
@@ -200,11 +207,34 @@ namespace QuizMaker
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry the correct answer was: {gameCard.correctAnswer}, {gameCard.answersList[gameCard.correctAnswer - Const.INDEX_ONE]}");
+                    Console.WriteLine($"Sorry the correct answer was: {gameCard.answersList[gameCard.correctAnswer - Const.INDEX_ONE]}");
                 }
                 Console.WriteLine();
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
+        }
+        /// <summary>
+        /// Allows to go back and edit one of the game cards before exporting the whole game to drive.
+        /// </summary>
+        /// <returns>Boolean</returns>
+        public static bool EditText()
+        {
+            bool editText = false;
+            char userDecision = default;
+            Console.WriteLine("Have you changed your mind? \nPress 'E' to edit or 'C' to continue.");
+            try
+            {
+                userDecision = Convert.ToChar(Console.ReadLine().ToLower());
+            }
+            catch (Exception invalidFormat)
+            {
+                Console.WriteLine(invalidFormat.Message);
+            }
+            if (userDecision == 'e')
+            { editText = true; Console.WriteLine("Please edit tour text!"); AddEmptyLine(); }
+            if (userDecision == 'c')
+              editText = false;
+            return editText;
         }
     }
 }

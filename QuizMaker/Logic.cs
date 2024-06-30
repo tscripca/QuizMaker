@@ -12,13 +12,13 @@ namespace QuizMaker
         /// <summary>
         /// Exports the object and saves it as an XML file.
         /// </summary>
-        /// <param name="QnADeckToExport"></param>
-        public static void ExportToDrive(List<QuizzGame> QnADeckToExport)
+        /// <param name="CardDeckToExport"></param>
+        public static void ExportToDrive(List<QuizzGame> CardDeckToExport)
         {
             using (FileStream file = File.Create(Const.SAVED_PATH))
             {
-                var writeDsk = new XmlSerializer(typeof(List<QuizzGame>));
-                writeDsk.Serialize(file, QnADeckToExport);
+                var writeOnDisk = new XmlSerializer(typeof(List<QuizzGame>));
+                writeOnDisk.Serialize(file, CardDeckToExport);
             }
         }
         /// <summary>
@@ -26,44 +26,50 @@ namespace QuizMaker
         /// </summary>
         /// <returns>The object list</returns>
         public static List<QuizzGame> ImportFromDrive()
-        {            
+        {
             var randomPickedCard = new QuizzGame();
             var deckWithShuffledCards = new List<QuizzGame>();
-            var importedQnADeck = new List<QuizzGame>();
-
-            using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
+            try
             {
-                var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                importedQnADeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
-                ShuffleCards(randomPickedCard, importedQnADeck, deckWithShuffledCards);
+                using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
+                {
+                    var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
+                    var importedCardDeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                    ShuffleCards(randomPickedCard, importedCardDeck, deckWithShuffledCards);
+                }
+            }
+            catch (Exception fileDoesNotExist)
+            {
+                Console.WriteLine(fileDoesNotExist.Message);
+                Console.WriteLine("Please build a game first!");
+                UIMethods.StartGame();
             }
             return deckWithShuffledCards;
         }
         /// <summary>
-        /// Shuffles objects inside a list.
+        /// Shuffles the contents of a List<T>.
         /// </summary>
         /// <param name="randomCard"></param>
-        /// <param name="loadedFromDriveDeckOfCards"></param>
+        /// <param name="importedDeck"></param>
         /// <param name="deckOfMixedCards"></param>
-        public static void ShuffleCards(QuizzGame randomCard, List<QuizzGame> loadedFromDriveDeckOfCards, List<QuizzGame> deckOfMixedCards)
+        public static void ShuffleCards(QuizzGame randomCard, List<QuizzGame> importedDeck, List<QuizzGame> deckOfMixedCards)
         {
             Random rng = new Random();
             bool allCardsAreInTheDeck = false;
-            int myIndex = 0;
             while (!allCardsAreInTheDeck)
             {
-                for (int i = 0; i < loadedFromDriveDeckOfCards.Count; i++)
+                for (int i = 0; i < importedDeck.Count; i++)
                 {
-                    foreach (QuizzGame shuffledCard in loadedFromDriveDeckOfCards)
+                    foreach (QuizzGame shuffledCard in importedDeck)
                     {
-                        myIndex = rng.Next(loadedFromDriveDeckOfCards.Count);
-                        randomCard = loadedFromDriveDeckOfCards[myIndex];
+                        int myIndex = rng.Next(importedDeck.Count);
+                        randomCard = importedDeck[myIndex];
                         if (!deckOfMixedCards.Contains(randomCard))
                         {
                             deckOfMixedCards.Add(randomCard);
                         }
                     }
-                    if (loadedFromDriveDeckOfCards.Count == deckOfMixedCards.Count)
+                    if (importedDeck.Count == deckOfMixedCards.Count)
                     {
                         allCardsAreInTheDeck = true;
                         break;
