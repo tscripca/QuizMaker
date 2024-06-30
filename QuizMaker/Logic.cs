@@ -22,7 +22,7 @@ namespace QuizMaker
             }
         }
         /// <summary>
-        /// Loads the XML file into an object list.
+        /// Loads the XML file into an object list. 
         /// </summary>
         /// <returns>The object list</returns>
         public static List<QuizzGame> ImportFromDrive()
