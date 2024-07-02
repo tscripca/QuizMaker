@@ -4,6 +4,7 @@ using QuizMaker;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+
 namespace QuizMaker
 {
     public class Logic
@@ -58,7 +59,7 @@ namespace QuizMaker
             bool allCardsAreInTheDeck = false;
             while (!allCardsAreInTheDeck)
             {
-                for (int i = 0; i < importedDeck.Count; i++)
+                for (int gameCardCounter = 0; gameCardCounter < importedDeck.Count; gameCardCounter++)
                 {
                     foreach (QuizzGame shuffledCard in importedDeck)
                     {

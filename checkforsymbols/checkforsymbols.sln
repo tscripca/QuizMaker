@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "checkforsymbols", "checkforsymbols\checkforsymbols.csproj", "{7D08D1A0-712D-4A57-B045-A9B115D08CE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D08D1A0-712D-4A57-B045-A9B115D08CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D08D1A0-712D-4A57-B045-A9B115D08CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D08D1A0-712D-4A57-B045-A9B115D08CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D08D1A0-712D-4A57-B045-A9B115D08CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D3B1FB0-19C6-47EC-A9F7-2C2FC46934F1}
+	EndGlobalSection
+EndGlobal
