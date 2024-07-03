@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 namespace QuizMaker
 {
     public class UIMethods
@@ -95,10 +96,9 @@ namespace QuizMaker
                     ClearScreen();
                 }
                 else checkIfStringIsEmpty = false;
-
-                foreach(char letter in userQuestion)
+                foreach (char letter in userQuestion)
                 {
-                    foreach(char symbol in stringOfSymbols)
+                    foreach (char symbol in stringOfSymbols)
                     {
                         if (symbol == letter)
                         {
@@ -152,20 +152,30 @@ namespace QuizMaker
             int numberOfQuestions = SetTotalNoOfQuestions();
             int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
             ClearScreen();
-            for (int questionCounter = 0; questionCounter < numberOfQuestions; questionCounter++)
+            CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
+            Logic.ExportToDrive(theMainQuizz);
+        }
+        /// <summary>
+        /// Creates the deck of QnA Cards.
+        /// </summary>
+        /// <param name="mainGameList"></param>
+        /// <param name="numOfQuestions"></param>
+        /// <param name="numOfAnswXQuestion"></param>
+        public static void CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
+        {
+            for (int questionCounter = 0; questionCounter < numOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
                 bool userWantstoEditText = true;
                 while (userWantstoEditText)
                 {
                     QnACard.quizzQuestion = AskUserQuestion();
-                    QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
+                    QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
                     QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
                     userWantstoEditText = EditText();
                 }
-                theMainQuizz.Add(QnACard);
+                mainGameList.Add(QnACard);
             }
-            Logic.ExportToDrive(theMainQuizz);
         }
         /// <summary>
         /// Stores the correct answer.
