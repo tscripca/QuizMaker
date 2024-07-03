@@ -12,5 +12,7 @@ namespace QuizMaker
     {
         public const string SAVED_PATH = @"QuizzGame.xml";
         public const int INDEX_ONE = 1;
+        public const char OPTION_ONE = '1';
+        public const char OPTION_TWO = '2';
     }
 }

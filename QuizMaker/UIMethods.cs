@@ -208,30 +208,40 @@ namespace QuizMaker
         /// </summary>
         /// <returns>An Enum</returns>
         public static void StartGame()
-        {
+        {            
             GameMode myGameMode = GameMode.invalid;
             while (myGameMode == GameMode.invalid)
             {
                 Console.WriteLine("1 - Build game.");
                 Console.WriteLine("2 - Play game.");
                 char userSelectsGameMode = default;
-                try
-                {
-                    userSelectsGameMode = Convert.ToChar(Console.ReadLine());
-                    ClearScreen();
-                }
-                catch (Exception invalidFormat)
-                {
-                    Console.WriteLine(invalidFormat.Message);
-                    ClearScreen();
-                }
+                userSelectsGameMode = ValidateUserInputChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
                 {
-                    case '1': myGameMode = GameMode.build; BuildTheGame(); break;
-                    case '2': myGameMode = GameMode.play; PlayTheGame(Logic.ImportFromDrive()); break;
+                    case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
+                    case Const.OPTION_TWO: myGameMode = GameMode.play; PlayTheGame(Logic.ImportFromDrive()); break;
                     default: myGameMode = GameMode.invalid; Console.WriteLine("Try again!"); break;
                 }
             }
+        }
+        /// <summary>
+        /// Check if input value is a char and returns its value;
+        /// </summary>
+        /// <param name="userInput"></param>
+        /// <returns>Char</returns>
+        public static char ValidateUserInputChar(char userInput)
+        {
+            try
+            {
+                userInput = Convert.ToChar(Console.ReadLine());
+                ClearScreen();
+            }
+            catch (Exception invalidFormat)
+            {
+                Console.WriteLine(invalidFormat.Message);
+                ClearScreen();
+            }
+            return userInput;
         }
         /// <summary>
         /// Code block where user is playing the game.
