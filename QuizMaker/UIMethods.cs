@@ -93,14 +93,14 @@ namespace QuizMaker
                 {
                     checkIfStringIsEmpty = String.IsNullOrEmpty(userQuestion);
                     Console.WriteLine("Question cannot be empty!");
-                    PressKey();
+                    //PressKey();
                     ClearScreen();
                 }
                 else checkIfStringIsEmpty = false;
                 if (!userQuestion.Any(char.IsDigit) || !userQuestion.Any(char.IsPunctuation))
                 {
                     if (!userQuestion.StartsWith("?") && userQuestion.EndsWith("?"))
-                        retypeQuestion = false;
+                        retypeQuestion = false;                    
                 }
                 else
                 {
@@ -163,7 +163,6 @@ namespace QuizMaker
                     userWantstoEditText = EditText();
                 }
                 theMainQuizz.Add(QnACard);
-                Console.WriteLine();
             }
             Logic.ExportToDrive(theMainQuizz);
         }
@@ -174,10 +173,23 @@ namespace QuizMaker
         /// <returns>Integer value</returns>
         public static int GetCorrectAnswer(List<string> listOfUserAnswers)
         {
+            bool indexOutOfRange = true;
             int correctAnswer = 0;
-            Console.Write("Correct answer?: ");
-            correctAnswer = ValidateUserInputInt(correctAnswer);
-            Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.INDEX_ONE]} as the correct answer.");
+            //check for index out of range.
+            while (indexOutOfRange)
+            {
+                Console.Write("Correct answer?: ");
+                try
+                {
+                    correctAnswer = ValidateUserInputInt(correctAnswer);
+                    Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.INDEX_ONE]} as the correct answer.");
+                    indexOutOfRange = false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
             return correctAnswer;
         }
         /// <summary>
@@ -248,38 +260,65 @@ namespace QuizMaker
         /// Allows to edit a card before adding it to the deck.
         /// </summary>
         /// <returns>Boolean</returns>
+        //public static bool EditText()
+        //{
+        //    bool editText = false;
+        //    bool validFormat = false;
+        //    char userDecision = default;
+        //    List<char> listOfDigits = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        //    Console.WriteLine("'E' to (edit)/'C' to (continue).");
+        //    while (!validFormat)
+        //    {
+        //        try
+        //        {
+        //            userDecision = Convert.ToChar(Console.ReadLine().ToLower());
+        //            if (userDecision == 'e') { Console.Write("Edit "); validFormat = true; editText = true; break; }
+        //            if (userDecision == 'c') { editText = false; break; }
+        //            //check if user input is a number.
+        //            for (int inputcounter = 0; inputcounter < listOfDigits.Count; inputcounter++)
+        //            {
+        //                if (userDecision == listOfDigits[inputcounter])
+        //                {
+        //                    validFormat = false;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Console.WriteLine(e.Message);
+        //            ClearScreen();
+        //        }
+        //        //if it's anything else than a number or 'c'/'e' it will ask for another input.
+        //        if (userDecision != 'e' && userDecision != 'c')
+        //        {
+        //            Console.WriteLine("Try again: ");
+        //        }
+        //    }
+        //    return editText;
+        //}
         public static bool EditText()
         {
             bool editText = false;
-            bool validFormat = false;
-            char userDecision = default;
-            List<char> listOfDigits = new List<char> { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-            Console.WriteLine("'E' to (edit)/'C' to (continue).");
-            while (!validFormat)
+            EditMode myChoice = EditMode.invalid;
+            while(myChoice == EditMode.invalid)
             {
+                Console.WriteLine("E - Edit");
+                Console.WriteLine("C - Continue");
+                char userChooseEditMode = default;
                 try
                 {
-                    userDecision = Convert.ToChar(Console.ReadLine().ToLower());
-                    if (userDecision == 'e') { Console.Write("Edit "); validFormat = true; editText = true; break; }
-                    if (userDecision == 'c') { editText = false; break; }
-                    //check if user input is a number.
-                    for (int inputcounter = 0; inputcounter < listOfDigits.Count; inputcounter++)
-                    {
-                        if (userDecision == listOfDigits[inputcounter])
-                        {
-                            validFormat = false;
-                            break;
-                        }
-                    }
-                }                
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    userChooseEditMode = Convert.ToChar(Console.ReadLine());
                 }
-                //if it's anything else than a number or 'c'/'e' it will ask for another input.
-                if (userDecision != 'e' && userDecision != 'c')
+                catch(Exception invalidFormat)
                 {
-                    Console.WriteLine("Try again: ");
+                    Console.WriteLine(invalidFormat.Message);
+                }
+                switch(userChooseEditMode)
+                {
+                    case 'e': myChoice = EditMode.edit; editText = true; Console.Write("Edit "); break;
+                    case 'c': myChoice = EditMode.cancel; break;
+                    default: myChoice = EditMode.invalid; Console.WriteLine("Try again!"); break;
                 }
             }
             return editText;
