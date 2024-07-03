@@ -132,7 +132,9 @@ namespace QuizMaker
                         Console.WriteLine("Answer is empty!");
                     }
                     else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
+                    {
                         Console.WriteLine("Contains strange characters.");
+                    }
                     else
                     {
                         answersList.Add(userAnswer);
@@ -285,14 +287,14 @@ namespace QuizMaker
             bool editText = true;
             while (!validFormat)
             {
-                Console.Write("C or E: ");
+                Console.Write("Enter(Continue) or E(Edit) card: ");
                 try
                 {
                     ConsoleKeyInfo userpress = Console.ReadKey();
                     char userInput = userpress.KeyChar;
                     Console.WriteLine();
                     if (userInput == 'e') { Console.Write("Edit "); validFormat = true; editText = true; }
-                    if (userInput == 'c') { validFormat = true; editText = false; }
+                    if (userpress.Key == ConsoleKey.Enter) { validFormat = true; editText = false; }
                 }
                 catch (Exception invalidFormat)
                 {
