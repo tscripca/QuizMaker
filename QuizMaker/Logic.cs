@@ -10,6 +10,7 @@ namespace QuizMaker
     public class Logic
     {
         public XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
+
         /// <summary>
         /// Exports the object and saves it as an XML file.
         /// </summary>

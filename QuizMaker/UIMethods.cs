@@ -84,8 +84,9 @@ namespace QuizMaker
             bool checkIfStringIsEmpty = true;
             bool retypeQuestion = false;
             string userQuestion = string.Empty;
-            while (checkIfStringIsEmpty || retypeQuestion == true)
+            while (checkIfStringIsEmpty || retypeQuestion)
             {
+                string stringOfSymbols = "!#$%&'()*+,-./:;<=>@[\\]^_`{|}~0123456789";
                 Console.Write("Question: ");
                 userQuestion = Console.ReadLine();
                 if (userQuestion == string.Empty)
@@ -94,15 +95,18 @@ namespace QuizMaker
                     ClearScreen();
                 }
                 else checkIfStringIsEmpty = false;
-                if (!userQuestion.Any(char.IsDigit) || !userQuestion.Any(char.IsPunctuation))
+
+                foreach(char letter in userQuestion)
                 {
-                    if (!userQuestion.StartsWith("?") && userQuestion.EndsWith("?"))
-                        retypeQuestion = false;
-                }
-                else
-                {
-                    Console.WriteLine("Contains numbers/symbols!");
-                    retypeQuestion = true;
+                    foreach(char symbol in stringOfSymbols)
+                    {
+                        if (symbol == letter)
+                        {
+                            retypeQuestion = true;
+                            break;
+                        }
+                    }
+                    break;
                 }
             }
             return userQuestion;
@@ -157,7 +161,7 @@ namespace QuizMaker
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numberOfAnswersPerQuestion);
                     QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
-                    userWantstoEditText = NewEditText();
+                    userWantstoEditText = EditText();
                 }
                 theMainQuizz.Add(QnACard);
             }
