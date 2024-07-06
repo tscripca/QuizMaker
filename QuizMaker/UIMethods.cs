@@ -120,26 +120,23 @@ namespace QuizMaker
             bool checkIfAnswerIsEmpty = true;
             bool retypeAnswer = true;
             List<string> answersList = new List<string>();
+            string letterString = "abcdefghijklmnopqrstuvwxyz";
             Console.WriteLine("Answers: ");
             for (int answerCounter = 0; answerCounter < selectNoOfAnswers; answerCounter++)
             {
-                while (checkIfAnswerIsEmpty || retypeAnswer)
+                Console.Write($"{letterString[answerCounter]}) ");
+                for (int letterCounter = answerCounter; letterCounter <= answerCounter;)
                 {
-                    userAnswer = Console.ReadLine();
-                    if (userAnswer == string.Empty)
+                    while (checkIfAnswerIsEmpty || retypeAnswer)
                     {
-                        Console.WriteLine("Answer is empty!");
+                        userAnswer = Console.ReadLine();
+                        if (userAnswer == string.Empty)
+                            Console.WriteLine("Answer is empty!");
+                        else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
+                            Console.WriteLine("Contains strange characters.");
+                        else { answersList.Add(userAnswer); checkIfAnswerIsEmpty = false; break; }
                     }
-                    else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
-                    {
-                        Console.WriteLine("Contains strange characters.");
-                    }
-                    else
-                    {
-                        answersList.Add(userAnswer);
-                        checkIfAnswerIsEmpty = false;
-                        break;
-                    }
+                    break;
                 }
             }
             return answersList;
@@ -157,16 +154,18 @@ namespace QuizMaker
             Logic.ExportToDrive(theMainQuizz);
         }
         /// <summary>
-        /// Creates the deck of QnA Cards.
+        /// Creates the deck of game cards.
         /// </summary>
         /// <param name="mainGameList"></param>
         /// <param name="numOfQuestions"></param>
         /// <param name="numOfAnswXQuestion"></param>
-        public static void CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
+        /// <returns>Only the list of possible answers without the question.</returns>
+        public static List<string> CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
         {
+            var QnACard = new QuizzGame();
+            QnACard.answersList = new List<string>();
             for (int questionCounter = 0; questionCounter < numOfQuestions; questionCounter++)
             {
-                var QnACard = new QuizzGame();
                 bool userWantstoEditText = true;
                 while (userWantstoEditText)
                 {
@@ -177,6 +176,7 @@ namespace QuizMaker
                 }
                 mainGameList.Add(QnACard);
             }
+            return QnACard.answersList;
         }
         /// <summary>
         /// Stores the correct answer.
@@ -188,30 +188,27 @@ namespace QuizMaker
             bool indexOutOfRange = true;
             int correctAnswer = 0;
             int howManyCorrectAnswers = 0;
-            List<string> listOfCorrectAnswers = new List<string>();
+            string stringOfLetters = "abcdefghijklmnopqrstuvwxyz";
+            var listOfCorrectAnswers = new List<string>();
             //check for index out of range.
             while (indexOutOfRange)
             {
                 Console.Write("How many correct answers?: ");
-                try
+                howManyCorrectAnswers = ValidateUserInputInt(howManyCorrectAnswers);
+                Console.WriteLine("Select answers: ");
+                for (int i = 0; i < howManyCorrectAnswers; i++)
                 {
-                    howManyCorrectAnswers = ValidateUserInputInt(howManyCorrectAnswers);
-                    Console.WriteLine("Select answer?: ");
-                    for (int i = 0; i < howManyCorrectAnswers; i++)
-                    {
-                        correctAnswer = ValidateUserInputInt(correctAnswer);
-                        listOfCorrectAnswers.Add(listOfCorrectAnswers[correctAnswer]);
-                    }
-                    Console.WriteLine("You have selected: ");
-                    for(int j = 0; j < listOfUserAnswers.Count; j++)
-                    {
-                        Console.WriteLine(listOfCorrectAnswers[correctAnswer]);
-                    }
-                    indexOutOfRange = false;
+                    correctAnswer = Convert.ToInt32(Console.ReadLine());
+                    listOfCorrectAnswers.Add(listOfUserAnswers[correctAnswer - 1]);
                 }
-                catch (Exception e)
+                Console.WriteLine("Your selected answers are: ");
+                for (int j = 0; j < listOfCorrectAnswers.Count; j++)
                 {
-                    Console.WriteLine(e.Message);
+                    for (int letterCount = j; letterCount <= j;)
+                    {
+                        Console.WriteLine($"{stringOfLetters[letterCount]}) {listOfCorrectAnswers[j]}");
+                        break;
+                    }                    
                 }
             }
             return correctAnswer;
@@ -221,7 +218,7 @@ namespace QuizMaker
         /// </summary>
         /// <returns>An Enum</returns>
         public static void StartGame()
-        {            
+        {
             GameMode myGameMode = GameMode.invalid;
             while (myGameMode == GameMode.invalid)
             {
@@ -232,7 +229,8 @@ namespace QuizMaker
                 switch (userSelectsGameMode)
                 {
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
-                    case Const.OPTION_TWO: myGameMode = GameMode.play; 
+                    case Const.OPTION_TWO:
+                        myGameMode = GameMode.play;
                         if (Logic.ImportFromDrive().Count != 0)
                         {
                             PlayTheGame(Logic.ImportFromDrive());

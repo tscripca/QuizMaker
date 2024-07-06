@@ -20,7 +20,7 @@ namespace QuizMaker
         {
             using (FileStream file = File.Create(Const.SAVED_PATH))
             {
-                var writeOnDisk = new XmlSerializer(typeof(List<QuizzGame>));
+                XmlSerializer writeOnDisk = new XmlSerializer(typeof(List<QuizzGame>));
                 writeOnDisk.Serialize(file, CardDeckToExport);
             }
         }
