@@ -171,7 +171,7 @@ namespace QuizMaker
                 {
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
-                    QnACard.correctAnswer = GetCorrectAnswer(QnACard.answersList);
+                    QnACard.listOfcorrectAnswers = GetCorrectAnswer(QnACard.answersList);
                     userWantstoEditText = EditText();
                 }
                 mainGameList.Add(QnACard);
@@ -179,39 +179,48 @@ namespace QuizMaker
             return QnACard.answersList;
         }
         /// <summary>
-        /// Stores the correct answer.
+        /// Storesc the correct answers in a list.
         /// </summary>
         /// <param name="listOfUserAnswers"></param>
-        /// <returns>Integer value</returns>
-        public static int GetCorrectAnswer(List<string> listOfUserAnswers)
+        /// <returns>List of strings</returns>
+        public static List<string> GetCorrectAnswer(List<string> listOfUserAnswers)
         {
-            bool indexOutOfRange = true;
+            var QnACard = new QuizzGame();
+            bool indexRangeCorrect = false;
             int correctAnswer = 0;
             int howManyCorrectAnswers = 0;
             string stringOfLetters = "abcdefghijklmnopqrstuvwxyz";
-            var listOfCorrectAnswers = new List<string>();
             //check for index out of range.
-            while (indexOutOfRange)
+            while (!indexRangeCorrect)
             {
                 Console.Write("How many correct answers?: ");
                 howManyCorrectAnswers = ValidateUserInputInt(howManyCorrectAnswers);
                 Console.WriteLine("Select answers: ");
-                for (int i = 0; i < howManyCorrectAnswers; i++)
+                try
                 {
-                    correctAnswer = Convert.ToInt32(Console.ReadLine());
-                    listOfCorrectAnswers.Add(listOfUserAnswers[correctAnswer - 1]);
-                }
-                Console.WriteLine("Your selected answers are: ");
-                for (int j = 0; j < listOfCorrectAnswers.Count; j++)
-                {
-                    for (int letterCount = j; letterCount <= j;)
+                    for (int i = 0; i < howManyCorrectAnswers; i++)
                     {
-                        Console.WriteLine($"{stringOfLetters[letterCount]}) {listOfCorrectAnswers[j]}");
-                        break;
-                    }                    
+                        correctAnswer = Convert.ToInt32(Console.ReadLine());
+                        QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - 1]);
+                    }
+                    Console.WriteLine("Your selected answers are: ");
+                    for (int j = 0; j < QnACard.listOfcorrectAnswers.Count; j++)
+                    {
+                        for (int letterCount = j; letterCount <= j;)
+                        {
+                            Console.WriteLine($"{stringOfLetters[letterCount]}) {QnACard.listOfcorrectAnswers[j]}");
+                            break;
+                        }
+                    }
+                    indexRangeCorrect = true;
+                }
+                catch (Exception outOfRange)
+                {
+                    Console.WriteLine(outOfRange.Message);
+                    indexRangeCorrect = false;
                 }
             }
-            return correctAnswer;
+            return QnACard.listOfcorrectAnswers;
         }
         /// <summary>
         /// Ask user to select a game mode.
@@ -280,18 +289,32 @@ namespace QuizMaker
                 {
                     Console.WriteLine($" {eachAnswerOption}");
                 }
-                Console.Write("Correct answer: ");
-                userSelectedAnswer = ValidateUserInputInt(userSelectedAnswer);
-                if (userSelectedAnswer == gameCard.correctAnswer)
+                
+                for (int i = 0; i < gameCard.listOfcorrectAnswers.Count; i++)
                 {
-                    keepCountOfCorrectAnswers++;
-                    Console.WriteLine("Correct!");
-                }
-                else
-                {
-                    Console.WriteLine($"Sorry the correct answer was: {gameCard.answersList[gameCard.correctAnswer - Const.INDEX_ONE]}");
-                }
-                Console.WriteLine();
+                    Console.Write("Correct answers: ");
+                    userSelectedAnswer = ValidateUserInputInt(userSelectedAnswer) - Const.INDEX_ONE;
+                    if (gameCard.answersList[userSelectedAnswer] == gameCard.answersList[userSelectedAnswer])
+                    {
+                        keepCountOfCorrectAnswers++;
+                        if (keepCountOfCorrectAnswers <= gameCard.listOfcorrectAnswers.Count - Const.INDEX_ONE)
+                        {
+                            Console.WriteLine($"Correct! --> {gameCard.listOfcorrectAnswers[i]}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You didn't get all the answers right!");
+                            foreach (string answerOption in gameCard.listOfcorrectAnswers)
+                            {
+                                Console.WriteLine(answerOption);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Incorrect!");
+                    }
+                }                
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
         }
