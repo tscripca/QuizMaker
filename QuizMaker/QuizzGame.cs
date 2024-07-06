@@ -14,5 +14,6 @@ namespace QuizMaker
         public List<string> answersList = new List<string>();
         public int correctAnswer;
         public int listIndex;
+        public List<string> listOfcorrectAnswers = new List<string>();
     }
 }

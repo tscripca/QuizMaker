@@ -43,9 +43,7 @@ namespace QuizMaker
             }
             catch (Exception fileDoesNotExist)
             {
-                Console.WriteLine(fileDoesNotExist.Message);
-                Console.WriteLine("Please build a game first!");
-                UIMethods.StartGame();
+
             }
             return deckWithShuffledCards;
         }

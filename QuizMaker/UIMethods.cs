@@ -5,7 +5,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 namespace QuizMaker
 {
     public class UIMethods
@@ -188,14 +187,26 @@ namespace QuizMaker
         {
             bool indexOutOfRange = true;
             int correctAnswer = 0;
+            int howManyCorrectAnswers = 0;
+            List<string> listOfCorrectAnswers = new List<string>();
             //check for index out of range.
             while (indexOutOfRange)
             {
-                Console.Write("Correct answer?: ");
+                Console.Write("How many correct answers?: ");
                 try
                 {
-                    correctAnswer = ValidateUserInputInt(correctAnswer);
-                    Console.WriteLine($"You have selected: {listOfUserAnswers[correctAnswer - Const.INDEX_ONE]} as the correct answer.");
+                    howManyCorrectAnswers = ValidateUserInputInt(howManyCorrectAnswers);
+                    Console.WriteLine("Select answer?: ");
+                    for (int i = 0; i < howManyCorrectAnswers; i++)
+                    {
+                        correctAnswer = ValidateUserInputInt(correctAnswer);
+                        listOfCorrectAnswers.Add(listOfCorrectAnswers[correctAnswer]);
+                    }
+                    Console.WriteLine("You have selected: ");
+                    for(int j = 0; j < listOfUserAnswers.Count; j++)
+                    {
+                        Console.WriteLine(listOfCorrectAnswers[correctAnswer]);
+                    }
                     indexOutOfRange = false;
                 }
                 catch (Exception e)
@@ -221,7 +232,16 @@ namespace QuizMaker
                 switch (userSelectsGameMode)
                 {
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
-                    case Const.OPTION_TWO: myGameMode = GameMode.play; PlayTheGame(Logic.ImportFromDrive()); break;
+                    case Const.OPTION_TWO: myGameMode = GameMode.play; 
+                        if (Logic.ImportFromDrive().Count != 0)
+                        {
+                            PlayTheGame(Logic.ImportFromDrive());
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your deck is empty, create a game first!");
+                        }
+                        break;
                     default: myGameMode = GameMode.invalid; Console.WriteLine("Try again!"); break;
                 }
             }
