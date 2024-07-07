@@ -120,23 +120,18 @@ namespace QuizMaker
             bool checkIfAnswerIsEmpty = true;
             bool retypeAnswer = true;
             List<string> answersList = new List<string>();
-            string letterString = "abcdefghijklmnopqrstuvwxyz";
             Console.WriteLine("Answers: ");
-            for (int answerCounter = 0; answerCounter < selectNoOfAnswers; answerCounter++)
+            for (int answCount = 0; answCount < selectNoOfAnswers; answCount++)
             {
-                Console.Write($"{letterString[answerCounter]}) ");
-                for (int letterCounter = answerCounter; letterCounter <= answerCounter;)
+                Console.Write($"{answCount + Const.INDEX_ONE}) ");
+                while (checkIfAnswerIsEmpty || retypeAnswer)
                 {
-                    while (checkIfAnswerIsEmpty || retypeAnswer)
-                    {
-                        userAnswer = Console.ReadLine();
-                        if (userAnswer == string.Empty)
-                            Console.WriteLine("Answer is empty!");
-                        else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
-                            Console.WriteLine("Contains strange characters.");
-                        else { answersList.Add(userAnswer); checkIfAnswerIsEmpty = false; break; }
-                    }
-                    break;
+                    userAnswer = Console.ReadLine();
+                    if (userAnswer == string.Empty)
+                        Console.WriteLine("Answer is empty!");
+                    else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
+                        Console.WriteLine("Contains strange characters.");
+                    else { answersList.Add(userAnswer); checkIfAnswerIsEmpty = false; break; }
                 }
             }
             return answersList;
@@ -189,7 +184,6 @@ namespace QuizMaker
             bool indexRangeCorrect = false;
             int correctAnswer = 0;
             int howManyCorrectAnswers = 0;
-            string stringOfLetters = "abcdefghijklmnopqrstuvwxyz";
             //check for index out of range.
             while (!indexRangeCorrect)
             {
@@ -206,11 +200,7 @@ namespace QuizMaker
                     Console.WriteLine("Your selected answers are: ");
                     for (int j = 0; j < QnACard.listOfcorrectAnswers.Count; j++)
                     {
-                        for (int letterCount = j; letterCount <= j;)
-                        {
-                            Console.WriteLine($"{stringOfLetters[letterCount]}) {QnACard.listOfcorrectAnswers[j]}");
-                            break;
-                        }
+                        Console.WriteLine($"{QnACard.listOfcorrectAnswers[j]}");
                     }
                     indexRangeCorrect = true;
                 }
@@ -240,7 +230,7 @@ namespace QuizMaker
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
                     case Const.OPTION_TWO:
                         myGameMode = GameMode.play;
-                        if (Logic.ImportFromDrive().Count != 0)
+                        if (File.Exists(Const.SAVED_PATH))
                         {
                             PlayTheGame(Logic.ImportFromDrive());
                         }
@@ -285,11 +275,10 @@ namespace QuizMaker
                 int userSelectedAnswer = 0;
                 Console.WriteLine();
                 Console.WriteLine($"Question: {gameCard.quizzQuestion}");
-                foreach (string eachAnswerOption in gameCard.answersList)
+                for (int eachAnswer = 0; eachAnswer < gameCard.answersList.Count; eachAnswer++)
                 {
-                    Console.WriteLine($" {eachAnswerOption}");
+                    Console.WriteLine($"{eachAnswer + Const.INDEX_ONE}) {gameCard.answersList[eachAnswer]}");
                 }
-                
                 for (int i = 0; i < gameCard.listOfcorrectAnswers.Count; i++)
                 {
                     Console.Write("Correct answers: ");
@@ -314,14 +303,18 @@ namespace QuizMaker
                     {
                         Console.WriteLine("Incorrect!");
                     }
-                }                
+                }
+                Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
             }
-            Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
+            /// <summary>
+            /// Allows to edit a card before adding it to the deck.
+            /// </summary>
+            /// <returns>Boolean</returns>       
         }
         /// <summary>
-        /// Allows to edit a card before adding it to the deck.
+        /// Allows to edit a game card before adding it to the deck.
         /// </summary>
-        /// <returns>Boolean</returns>       
+        /// <returns>Boolean</returns>
         public static bool EditText()
         {
             bool validFormat = false;

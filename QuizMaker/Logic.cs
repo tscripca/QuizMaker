@@ -32,18 +32,11 @@ namespace QuizMaker
         {
             var randomPickedCard = new QuizzGame();
             var deckWithShuffledCards = new List<QuizzGame>();
-            try
+            using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
             {
-                using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
-                {
-                    var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                    var importedCardDeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
-                    ShuffleCards(randomPickedCard, importedCardDeck, deckWithShuffledCards);
-                }
-            }
-            catch (Exception fileDoesNotExist)
-            {
-
+                var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
+                var importedCardDeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                ShuffleCards(randomPickedCard, importedCardDeck, deckWithShuffledCards);
             }
             return deckWithShuffledCards;
         }
