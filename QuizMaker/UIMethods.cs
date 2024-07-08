@@ -130,17 +130,18 @@ namespace QuizMaker
             }
             return answersList;
         }
+        /// <summary>
+        /// Method where the user creates the deck of QnA card.
         /// </summary>
         /// <param name="mainGameList"></param>
         /// <param name="numOfQuestions"></param>
         /// <param name="numOfAnswXQuestion"></param>
-        /// <returns>Only the list of possible answers without the question.</returns>
-        public static List<string> CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
-        {
-            var QnACard = new QuizzGame();
-            QnACard.answersList = new List<string>();
+        public static void CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
+        {           
             for (int questionCounter = 0; questionCounter < numOfQuestions; questionCounter++)
             {
+                var QnACard = new QuizzGame();
+                QnACard.answersList = new List<string>();
                 bool userWantstoEditText = true;
                 while (userWantstoEditText)
                 {
@@ -148,14 +149,13 @@ namespace QuizMaker
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
                     QnACard.listOfcorrectAnswers = GetCorrectAnswer(QnACard.answersList);
-                    userWantstoEditText = EditText();
+                    userWantstoEditText = EditText();                    
                 }
                 mainGameList.Add(QnACard);
             }
-            return QnACard.answersList;
         }
         /// <summary>
-        /// Code block where user build the quizz game and saves it to the local drive.
+        /// Set the initial number of questions and answers.
         /// </summary>
         public static void BuildTheGame()
         {
@@ -223,15 +223,17 @@ namespace QuizMaker
         /// <returns>An Enum</returns>
         public static void StartGame()
         {
+            //this method needs to return a user selection to start the game.
             GameMode myGameMode = GameMode.invalid;
             while (myGameMode == GameMode.invalid)
             {
-                Console.WriteLine("1 - Build game.");
-                Console.WriteLine("2 - Play game.");
+                Console.WriteLine($"{Const.OPTION_ONE} - Build game.");
+                Console.WriteLine($"{Const.OPTION_TWO} - Play game.");
                 char userSelectsGameMode = default;
                 userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
                 {
+                    //BuildTheGame() will then start after user selection.(outside)
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
                     case Const.OPTION_TWO:
                         myGameMode = GameMode.play;
