@@ -38,7 +38,7 @@ namespace QuizMaker
         {
             int numberOfQuestions = 0;
             Console.WriteLine("How many questions?");
-            numberOfQuestions = ValidateUserInputInt(numberOfQuestions);
+            numberOfQuestions = ValidateUserFormatInt(numberOfQuestions);
             return numberOfQuestions;
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace QuizMaker
         {
             int answersPerQuestion = 0;
             Console.WriteLine("Answers per each question?");
-            answersPerQuestion = ValidateUserInputInt(answersPerQuestion);
+            answersPerQuestion = ValidateUserFormatInt(answersPerQuestion);
             return answersPerQuestion;
         }
         /// <summary>
@@ -57,7 +57,7 @@ namespace QuizMaker
         /// </summary>
         /// <param name="userDataIn"></param>
         /// <returns>An integer value!</returns>
-        public static int ValidateUserInputInt(int userDataIn)
+        public static int ValidateUserFormatInt(int userDataIn)
         {
             bool validFormat = false;
             while (!validFormat)
@@ -82,11 +82,11 @@ namespace QuizMaker
         public static string AskUserQuestion()
         {
             bool checkIfStringIsEmpty = true;
-            bool retypeQuestion = false;
+            bool retypeQuestion = true;
             string userQuestion = string.Empty;
             while (checkIfStringIsEmpty || retypeQuestion)
             {
-                string stringOfSymbols = "!#$%&'()*+,-./:;<=>@[\\]^_`{|}~0123456789";
+                //no need to type the question mark, it will be displayed in PlayGame mode.
                 Console.Write("Question: ");
                 userQuestion = Console.ReadLine();
                 if (userQuestion == string.Empty)
@@ -95,18 +95,11 @@ namespace QuizMaker
                     ClearScreen();
                 }
                 else checkIfStringIsEmpty = false;
-                foreach (char letter in userQuestion)
+                if (userQuestion.Any(char.IsPunctuation))
                 {
-                    foreach (char symbol in stringOfSymbols)
-                    {
-                        if (symbol == letter)
-                        {
-                            retypeQuestion = true;
-                            break;
-                        }
-                    }
-                    break;
+                    Console.WriteLine("Contains symbols.");
                 }
+                else retypeQuestion = false;
             }
             return userQuestion;
         }
@@ -116,6 +109,7 @@ namespace QuizMaker
         /// <returns>A list of strings.</returns>
         public static List<string> SetUserAnswers(int selectNoOfAnswers)
         {
+            var gameCard = new QuizzGame();
             string userAnswer = string.Empty;
             bool checkIfAnswerIsEmpty = true;
             bool retypeAnswer = true;
@@ -181,26 +175,37 @@ namespace QuizMaker
         public static List<string> GetCorrectAnswer(List<string> listOfUserAnswers)
         {
             var QnACard = new QuizzGame();
-            bool indexRangeCorrect = false;
+            var listOfIndexes = new List<int>();
             int correctAnswer = 0;
             int howManyCorrectAnswers = 0;
-            //check for index out of range.
+            bool indexRangeCorrect = false;
+            bool correctNumOfAnsw = false;
+            //check for indexOfAnswers out of range.
             while (!indexRangeCorrect)
             {
                 Console.Write("How many correct answers?: ");
-                howManyCorrectAnswers = ValidateUserInputInt(howManyCorrectAnswers);
+                while (!correctNumOfAnsw)
+                {
+                    howManyCorrectAnswers = ValidateUserFormatInt(howManyCorrectAnswers);
+                    if (howManyCorrectAnswers <= listOfUserAnswers.Count)
+                    {
+                        correctNumOfAnsw = true;
+                    }
+                    else Console.WriteLine("Try again: ");
+                }
                 Console.WriteLine("Select answers: ");
                 try
                 {
                     for (int i = 0; i < howManyCorrectAnswers; i++)
                     {
                         correctAnswer = Convert.ToInt32(Console.ReadLine());
-                        QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - 1]);
+                        QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - Const.INDEX_ONE]);
+                        listOfIndexes.Add(correctAnswer);
                     }
                     Console.WriteLine("Your selected answers are: ");
                     for (int j = 0; j < QnACard.listOfcorrectAnswers.Count; j++)
                     {
-                        Console.WriteLine($"{QnACard.listOfcorrectAnswers[j]}");
+                        Console.WriteLine($"{listOfIndexes[j]}) {QnACard.listOfcorrectAnswers[j]}");
                     }
                     indexRangeCorrect = true;
                 }
@@ -224,7 +229,7 @@ namespace QuizMaker
                 Console.WriteLine("1 - Build game.");
                 Console.WriteLine("2 - Play game.");
                 char userSelectsGameMode = default;
-                userSelectsGameMode = ValidateUserInputChar(userSelectsGameMode);
+                userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
                 {
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
@@ -248,7 +253,7 @@ namespace QuizMaker
         /// </summary>
         /// <param name="userInput"></param>
         /// <returns>Char</returns>
-        public static char ValidateUserInputChar(char userInput)
+        public static char ValidateInputFormatChar(char userInput)
         {
             try
             {
@@ -274,42 +279,32 @@ namespace QuizMaker
             {
                 int userSelectedAnswer = 0;
                 Console.WriteLine();
-                Console.WriteLine($"Question: {gameCard.quizzQuestion}");
+                //question mark will be added automatically.
+                Console.WriteLine($"{gameCard.quizzQuestion}?");
                 for (int eachAnswer = 0; eachAnswer < gameCard.answersList.Count; eachAnswer++)
                 {
-                    Console.WriteLine($"{eachAnswer + Const.INDEX_ONE}) {gameCard.answersList[eachAnswer]}");
-                }
-                for (int i = 0; i < gameCard.listOfcorrectAnswers.Count; i++)
+                    for (int bulletNum = eachAnswer; eachAnswer <= bulletNum;)
+                    {
+                        Console.WriteLine($"{bulletNum + Const.INDEX_ONE}) {gameCard.answersList[eachAnswer]}");
+                        break;
+                    }
+                }  
+                for (int k = 0; k < gameCard.listOfcorrectAnswers.Count; k++)
                 {
-                    Console.Write("Correct answers: ");
-                    userSelectedAnswer = ValidateUserInputInt(userSelectedAnswer) - Const.INDEX_ONE;
-                    if (gameCard.answersList[userSelectedAnswer] == gameCard.answersList[userSelectedAnswer])
-                    {
-                        keepCountOfCorrectAnswers++;
-                        if (keepCountOfCorrectAnswers <= gameCard.listOfcorrectAnswers.Count - Const.INDEX_ONE)
+                    Console.Write($"Answer {k + Const.INDEX_ONE}: ");
+                    userSelectedAnswer = ValidateUserFormatInt(userSelectedAnswer);
+                    //checking user choice against the list where I've stored the correct answers to see if there is a match.
+                    for (int p = 0; p < gameCard.listOfcorrectAnswers.Count; p++)
+                    { 
+                        if (gameCard.answersList[userSelectedAnswer - Const.INDEX_ONE] == gameCard.listOfcorrectAnswers[p])
                         {
-                            Console.WriteLine($"Correct! --> {gameCard.listOfcorrectAnswers[i]}");
+                            keepCountOfCorrectAnswers++;
+                            break;
                         }
-                        else
-                        {
-                            Console.WriteLine("You didn't get all the answers right!");
-                            foreach (string answerOption in gameCard.listOfcorrectAnswers)
-                            {
-                                Console.WriteLine(answerOption);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Incorrect!");
                     }
                 }
-                Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers!");
-            }
-            /// <summary>
-            /// Allows to edit a card before adding it to the deck.
-            /// </summary>
-            /// <returns>Boolean</returns>       
+                Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
+            }      
         }
         /// <summary>
         /// Allows to edit a game card before adding it to the deck.
