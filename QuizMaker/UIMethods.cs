@@ -130,20 +130,6 @@ namespace QuizMaker
             }
             return answersList;
         }
-        /// <summary>
-        /// Code block where user build the quizz game and saves it to the local drive.
-        /// </summary>
-        public static void BuildTheGame()
-        {
-            var theMainQuizz = new List<QuizzGame>();
-            int numberOfQuestions = SetTotalNoOfQuestions();
-            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
-            ClearScreen();
-            CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
-            Logic.ExportToDrive(theMainQuizz);
-        }
-        /// <summary>
-        /// Creates the deck of game cards.
         /// </summary>
         /// <param name="mainGameList"></param>
         /// <param name="numOfQuestions"></param>
@@ -158,6 +144,7 @@ namespace QuizMaker
                 bool userWantstoEditText = true;
                 while (userWantstoEditText)
                 {
+                    Console.WriteLine();
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
                     QnACard.listOfcorrectAnswers = GetCorrectAnswer(QnACard.answersList);
@@ -167,6 +154,19 @@ namespace QuizMaker
             }
             return QnACard.answersList;
         }
+        /// <summary>
+        /// Code block where user build the quizz game and saves it to the local drive.
+        /// </summary>
+        public static void BuildTheGame()
+        {
+            var theMainQuizz = new List<QuizzGame>();
+            int numberOfQuestions = SetTotalNoOfQuestions();
+            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
+            ClearScreen();
+            CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
+            Logic.ExportToDrive(theMainQuizz);
+        }
+        
         /// <summary>
         /// Storesc the correct answers in a list.
         /// </summary>
@@ -273,7 +273,6 @@ namespace QuizMaker
         /// <param name="deckOfCards"></param>
         public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
-            int keepCountOfCorrectAnswers = 0;
             Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
             foreach (QuizzGame gameCard in deckOfCards)
             {
@@ -288,23 +287,35 @@ namespace QuizMaker
                         Console.WriteLine($"{bulletNum + Const.INDEX_ONE}) {gameCard.answersList[eachAnswer]}");
                         break;
                     }
-                }  
-                for (int k = 0; k < gameCard.listOfcorrectAnswers.Count; k++)
+                }
+                KeepTrackOfAnswers(userSelectedAnswer, gameCard);                
+            }      
+        }
+        /// <summary>
+        /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
+        /// </summary>
+        /// <param name="userTryToAnswer"></param>
+        /// <param name="cardAx"></param>
+        /// <returns>Points earned</returns>
+        public static int KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
+        {
+            int keepCountOfCorrectAnswers = 0;
+            for (int k = 0; k < cardAx.listOfcorrectAnswers.Count; k++)
+            {
+                Console.Write($"Answer {k + Const.INDEX_ONE}: ");
+                userTryToAnswer = ValidateUserFormatInt(userTryToAnswer);
+                //checking user choice against the list where I've stored the correct answers to see if there is a match.
+                for (int p = 0; p < cardAx.listOfcorrectAnswers.Count; p++)
                 {
-                    Console.Write($"Answer {k + Const.INDEX_ONE}: ");
-                    userSelectedAnswer = ValidateUserFormatInt(userSelectedAnswer);
-                    //checking user choice against the list where I've stored the correct answers to see if there is a match.
-                    for (int p = 0; p < gameCard.listOfcorrectAnswers.Count; p++)
-                    { 
-                        if (gameCard.answersList[userSelectedAnswer - Const.INDEX_ONE] == gameCard.listOfcorrectAnswers[p])
-                        {
-                            keepCountOfCorrectAnswers++;
-                            break;
-                        }
+                    if (cardAx.answersList[userTryToAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[p])
+                    {
+                        keepCountOfCorrectAnswers++;
+                        break;
                     }
                 }
-                Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
-            }      
+            }
+            Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
+            return keepCountOfCorrectAnswers;
         }
         /// <summary>
         /// Allows to edit a game card before adding it to the deck.
