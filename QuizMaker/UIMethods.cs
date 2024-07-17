@@ -292,6 +292,7 @@ namespace QuizMaker
                 }
                 KeepTrackOfAnswers(userSelectedAnswer, gameCard);
             }
+
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
