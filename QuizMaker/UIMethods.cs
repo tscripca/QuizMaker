@@ -137,7 +137,7 @@ namespace QuizMaker
         /// <param name="numOfQuestions"></param>
         /// <param name="numOfAnswXQuestion"></param>
         public static void CreateDeckOfCards(List<QuizzGame> mainGameList, int numOfQuestions, int numOfAnswXQuestion)
-        {           
+        {
             for (int questionCounter = 0; questionCounter < numOfQuestions; questionCounter++)
             {
                 var QnACard = new QuizzGame();
@@ -149,7 +149,7 @@ namespace QuizMaker
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
                     QnACard.listOfcorrectAnswers = GetCorrectAnswer(QnACard.answersList);
-                    userWantstoEditText = EditText();                    
+                    userWantstoEditText = EditText();
                 }
                 mainGameList.Add(QnACard);
             }
@@ -166,7 +166,6 @@ namespace QuizMaker
             CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
             Logic.ExportToDrive(theMainQuizz);
         }
-        
         /// <summary>
         /// Storesc the correct answers in a list.
         /// </summary>
@@ -223,17 +222,18 @@ namespace QuizMaker
         /// <returns>An Enum</returns>
         public static void StartGame()
         {
-            //this method needs to return a user selection to start the game.
             GameMode myGameMode = GameMode.invalid;
             while (myGameMode == GameMode.invalid)
             {
                 Console.WriteLine($"{Const.OPTION_ONE} - Build game.");
                 Console.WriteLine($"{Const.OPTION_TWO} - Play game.");
+
+                var importSerializer = new XmlSerializer(typeof(List<QuizzGame>));
+
                 char userSelectsGameMode = default;
                 userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
                 {
-                    //BuildTheGame() will then start after user selection.(outside)
                     case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
                     case Const.OPTION_TWO:
                         myGameMode = GameMode.play;
@@ -290,8 +290,8 @@ namespace QuizMaker
                         break;
                     }
                 }
-                KeepTrackOfAnswers(userSelectedAnswer, gameCard);                
-            }      
+                KeepTrackOfAnswers(userSelectedAnswer, gameCard);
+            }
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.

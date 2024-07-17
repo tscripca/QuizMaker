@@ -5,12 +5,14 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace QuizMaker
 {
     public class Logic
     {
-        public XmlSerializer serializer = new XmlSerializer(typeof(List<QuizzGame>));
+        public static readonly XmlSerializer serializer = new(typeof(List<QuizzGame>));
+        public static readonly Random rng = new();
 
         /// <summary>
         /// Exports the object and saves it as an XML file.
@@ -19,9 +21,8 @@ namespace QuizMaker
         public static void ExportToDrive(List<QuizzGame> CardDeckToExport)
         {
             using (FileStream file = File.Create(Const.SAVED_PATH))
-            {
-                XmlSerializer writeOnDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                writeOnDisk.Serialize(file, CardDeckToExport);
+            {               
+                serializer.Serialize(file, CardDeckToExport);
             }
         }
         /// <summary>
@@ -34,8 +35,7 @@ namespace QuizMaker
             var deckWithShuffledCards = new List<QuizzGame>();
             using (FileStream loadedFile = File.OpenRead(Const.SAVED_PATH))
             {
-                var readFromDisk = new XmlSerializer(typeof(List<QuizzGame>));
-                var importedCardDeck = readFromDisk.Deserialize(loadedFile) as List<QuizzGame>;
+                var importedCardDeck = serializer.Deserialize(loadedFile) as List<QuizzGame>;
                 ShuffleCards(randomPickedCard, importedCardDeck, deckWithShuffledCards);
             }
             return deckWithShuffledCards;
@@ -48,7 +48,6 @@ namespace QuizMaker
         /// <param name="deckOfMixedCards"></param>
         public static void ShuffleCards(QuizzGame randomCard, List<QuizzGame> importedDeck, List<QuizzGame> deckOfMixedCards)
         {
-            Random rng = new Random();
             bool allCardsAreInTheDeck = false;
             while (!allCardsAreInTheDeck)
             {
