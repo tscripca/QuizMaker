@@ -292,7 +292,6 @@ namespace QuizMaker
                 }
                 KeepTrackOfAnswers(userSelectedAnswer, gameCard);
             }
-
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
@@ -300,14 +299,14 @@ namespace QuizMaker
         /// <param name="userTryToAnswer"></param>
         /// <param name="cardAx"></param>
         /// <returns>Points earned</returns>
-        public static int KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
+        public static void KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
         {
             int keepCountOfCorrectAnswers = 0;
             for (int k = 0; k < cardAx.listOfcorrectAnswers.Count; k++)
             {
                 Console.Write($"Answer {k + Const.INDEX_ONE}: ");
                 userTryToAnswer = ValidateUserFormatInt(userTryToAnswer);
-                //checking user choice against the list where I've stored the correct answers to see if there is a match.
+                //comparing user choice with the list of correct answers to see if there is a match.
                 for (int p = 0; p < cardAx.listOfcorrectAnswers.Count; p++)
                 {
                     if (cardAx.answersList[userTryToAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[p])
@@ -318,7 +317,6 @@ namespace QuizMaker
                 }
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
-            return keepCountOfCorrectAnswers;
         }
         /// <summary>
         /// Allows to edit a game card before adding it to the deck.

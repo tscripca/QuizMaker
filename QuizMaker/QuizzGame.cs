@@ -13,5 +13,6 @@ namespace QuizMaker
         public string quizzQuestion;
         public List<string> answersList = new List<string>();
         public List<string> listOfcorrectAnswers = new List<string>();
+        public int countAllAnswers = 0;
     }
 }

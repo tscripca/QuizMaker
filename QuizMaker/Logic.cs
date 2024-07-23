@@ -11,8 +11,8 @@ namespace QuizMaker
 {
     public class Logic
     {
-        public static readonly XmlSerializer serializer = new(typeof(List<QuizzGame>));
-        public static readonly Random rng = new();
+        private static readonly XmlSerializer serializer = new(typeof(List<QuizzGame>));
+        private static readonly Random rng = new();
 
         /// <summary>
         /// Exports the object and saves it as an XML file.
