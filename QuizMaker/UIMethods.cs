@@ -225,8 +225,8 @@ namespace QuizMaker
             GameMode myGameMode = GameMode.invalid;
             while (myGameMode == GameMode.invalid)
             {
-                Console.WriteLine($"{Const.OPTION_ONE} - Build game.");
-                Console.WriteLine($"{Const.OPTION_TWO} - Play game.");
+                Console.WriteLine($"{Const.BUILD_MODE} - Build game.");
+                Console.WriteLine($"{Const.PLAY_MODE} - Play game.");
 
                 var importSerializer = new XmlSerializer(typeof(List<QuizzGame>));
 
@@ -234,8 +234,8 @@ namespace QuizMaker
                 userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
                 {
-                    case Const.OPTION_ONE: myGameMode = GameMode.build; BuildTheGame(); break;
-                    case Const.OPTION_TWO:
+                    case Const.BUILD_MODE: myGameMode = GameMode.build; BuildTheGame(); break;
+                    case Const.PLAY_MODE:
                         myGameMode = GameMode.play;
                         if (File.Exists(Const.SAVED_PATH))
                         {
