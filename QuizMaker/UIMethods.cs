@@ -227,9 +227,6 @@ namespace QuizMaker
             {
                 Console.WriteLine($"{Const.BUILD_MODE} - Build game.");
                 Console.WriteLine($"{Const.PLAY_MODE} - Play game.");
-
-                var importSerializer = new XmlSerializer(typeof(List<QuizzGame>));
-
                 char userSelectsGameMode = default;
                 userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
                 switch (userSelectsGameMode)
