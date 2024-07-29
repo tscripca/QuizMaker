@@ -9,7 +9,6 @@ namespace QuizMaker
 {
     public class UIMethods
     {
-        private static int finalScore;
         /// <summary>
         /// Adds an empty line.
         /// </summary>
@@ -273,7 +272,7 @@ namespace QuizMaker
         /// <param name="deckOfCards"></param>
         public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
-            
+            int totalScore = 0;
             Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
             foreach (QuizzGame gameCard in deckOfCards)
             {
@@ -289,10 +288,10 @@ namespace QuizMaker
                         break;
                     }
                 }
-              finalScore += KeepTrackOfAnswers(userSelectedAnswer, gameCard);
+                totalScore += KeepTrackOfAnswers(userSelectedAnswer, gameCard);
             }
             AddEmptyLine();
-            Console.WriteLine($"Your final score is: {finalScore}");
+            Console.WriteLine($"Your total score is: {totalScore}");
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
