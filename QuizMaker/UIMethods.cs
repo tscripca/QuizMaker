@@ -9,6 +9,7 @@ namespace QuizMaker
 {
     public class UIMethods
     {
+        private static int finalScore;
         /// <summary>
         /// Adds an empty line.
         /// </summary>
@@ -272,6 +273,7 @@ namespace QuizMaker
         /// <param name="deckOfCards"></param>
         public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
+            
             Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
             foreach (QuizzGame gameCard in deckOfCards)
             {
@@ -287,8 +289,10 @@ namespace QuizMaker
                         break;
                     }
                 }
-                KeepTrackOfAnswers(userSelectedAnswer, gameCard);
+              finalScore += KeepTrackOfAnswers(userSelectedAnswer, gameCard);
             }
+            AddEmptyLine();
+            Console.WriteLine($"Your final score is: {finalScore}");
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
@@ -296,7 +300,7 @@ namespace QuizMaker
         /// <param name="userTryToAnswer"></param>
         /// <param name="cardAx"></param>
         /// <returns>Points earned</returns>
-        public static void KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
+        public static int KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
         {
             int keepCountOfCorrectAnswers = 0;
             for (int k = 0; k < cardAx.listOfcorrectAnswers.Count; k++)
@@ -314,6 +318,7 @@ namespace QuizMaker
                 }
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
+            return keepCountOfCorrectAnswers;
         }
         /// <summary>
         /// Allows to edit a game card before adding it to the deck.
