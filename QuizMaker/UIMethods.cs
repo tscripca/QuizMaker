@@ -272,6 +272,7 @@ namespace QuizMaker
         /// <param name="deckOfCards"></param>
         public static void PlayTheGame(List<QuizzGame> deckOfCards)
         {
+            int supposedAnswers = 0;
             int totalScore = 0;
             Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
             foreach (QuizzGame gameCard in deckOfCards)
@@ -289,9 +290,11 @@ namespace QuizMaker
                     }
                 }
                 totalScore += KeepTrackOfAnswers(userSelectedAnswer, gameCard);
+                supposedAnswers += gameCard.listOfcorrectAnswers.Count;
             }
             AddEmptyLine();
-            Console.WriteLine($"Your total score is: {totalScore}");
+            SetPassOrFail(totalScore, supposedAnswers);
+            Console.WriteLine($"You've answered {totalScore} out of {supposedAnswers}");
         }
         /// <summary>
         /// Compares the user selection with the list of correct answers and, if correct, keeps track of points earned.
@@ -344,6 +347,20 @@ namespace QuizMaker
                 }
             }
             return editText;
+        }
+        /// <summary>
+        /// Calculates the final score percentage and displays the result.
+        /// </summary>
+        /// <param name="finalScore"></param>
+        /// <param name="supposedCorrectAnswers"></param>
+        public static void SetPassOrFail(double finalScore, double supposedCorrectAnswers)
+        {
+            int passGrade = 80;
+            double percentageRetreived = finalScore*100/supposedCorrectAnswers;
+            if (percentageRetreived >= passGrade)
+                Console.WriteLine($"Passed! Your score is: {percentageRetreived}%");
+            else
+                Console.WriteLine($"Failed! your score is: {percentageRetreived}%");
         }
     }
 }
