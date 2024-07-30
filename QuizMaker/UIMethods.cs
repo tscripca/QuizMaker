@@ -36,9 +36,9 @@ namespace QuizMaker
         /// <returns>An integer</returns>
         public static int SetTotalNoOfQuestions()
         {
-            int numberOfQuestions = 0;
+            string numOfQst = default;
             Console.WriteLine("How many questions?");
-            numberOfQuestions = ValidateUserFormatInt(numberOfQuestions);
+            int numberOfQuestions = ValidateInputFormatInt(numOfQst);
             return numberOfQuestions;
         }
         /// <summary>
@@ -47,33 +47,28 @@ namespace QuizMaker
         /// <returns>An integer</returns>
         public static int SetNoOfAnswersPerEachQuestion()
         {
-            int answersPerQuestion = 0;
+            string answersPerQuestion = " ";
             Console.WriteLine("Answers per each question?");
-            answersPerQuestion = ValidateUserFormatInt(answersPerQuestion);
-            return answersPerQuestion;
+            int ansXQst = ValidateInputFormatInt(answersPerQuestion);
+            return ansXQst;
         }
         /// <summary>
         /// Validates user input for int values only.
         /// </summary>
         /// <param name="userDataIn"></param>
         /// <returns>An integer value!</returns>
-        public static int ValidateUserFormatInt(int userDataIn)
+        public static int ValidateInputFormatInt(string userDataIn)
         {
             bool validFormat = false;
+            int newVar = 0;
             while (!validFormat)
             {
-                try
-                {
-                    userDataIn = Convert.ToInt32(Console.ReadLine());
-                    validFormat = true;
-                }
-                catch (Exception inputValidationFail)
-                {
-                    Console.WriteLine(inputValidationFail.Message);
-                    Console.Write("Try Again: ");
-                }
+                userDataIn = Console.ReadLine();
+                validFormat = int.TryParse(userDataIn, out newVar);
+                if(!validFormat)
+                    Console.WriteLine("Only numbers please, try again!");
             }
-            return userDataIn;
+            return newVar;
         }
         /// <summary>
         /// Asks for user input. Special characters/symbols are not allowed.
@@ -176,7 +171,8 @@ namespace QuizMaker
             var QnACard = new QuizzGame();
             var listOfIndexes = new List<int>();
             int correctAnswer = 0;
-            int howManyCorrectAnswers = 0;
+            string howManyCorrectAnswers = default;
+            int howManyCorrAns = 0;
             bool indexRangeCorrect = false;
             bool correctNumOfAnsw = false;
             //check for indexOfAnswers out of range.
@@ -185,8 +181,8 @@ namespace QuizMaker
                 Console.Write("How many correct answers?: ");
                 while (!correctNumOfAnsw)
                 {
-                    howManyCorrectAnswers = ValidateUserFormatInt(howManyCorrectAnswers);
-                    if (howManyCorrectAnswers <= listOfUserAnswers.Count)
+                    howManyCorrAns = ValidateInputFormatInt(howManyCorrectAnswers);
+                    if (howManyCorrAns <= listOfUserAnswers.Count)
                     {
                         correctNumOfAnsw = true;
                     }
@@ -195,7 +191,7 @@ namespace QuizMaker
                 Console.WriteLine("Select answers: ");
                 try
                 {
-                    for (int i = 0; i < howManyCorrectAnswers; i++)
+                    for (int i = 0; i < howManyCorrAns; i++)
                     {
                         correctAnswer = Convert.ToInt32(Console.ReadLine());
                         QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - Const.INDEX_ONE]);
@@ -277,7 +273,7 @@ namespace QuizMaker
             Console.WriteLine($"Your deck contains {deckOfCards.Count} cards.");
             foreach (QuizzGame gameCard in deckOfCards)
             {
-                int userSelectedAnswer = 0;
+                string userSelectedAnswer = default;
                 Console.WriteLine();
                 //question mark will be added automatically.
                 Console.WriteLine($"{gameCard.quizzQuestion}?");
@@ -302,17 +298,18 @@ namespace QuizMaker
         /// <param name="userTryToAnswer"></param>
         /// <param name="cardAx"></param>
         /// <returns>Points earned</returns>
-        public static int KeepTrackOfAnswers(int userTryToAnswer, QuizzGame cardAx)
+        public static int KeepTrackOfAnswers(string userTryToAnswer, QuizzGame cardAx)
         {
             int keepCountOfCorrectAnswers = 0;
+            int userTry = 0;
             for (int k = 0; k < cardAx.listOfcorrectAnswers.Count; k++)
             {
                 Console.Write($"Answer {k + Const.INDEX_ONE}: ");
-                userTryToAnswer = ValidateUserFormatInt(userTryToAnswer);
+                userTry = ValidateInputFormatInt(userTryToAnswer);
                 //comparing user choice with the list of correct answers to see if there is a match.
                 for (int p = 0; p < cardAx.listOfcorrectAnswers.Count; p++)
                 {
-                    if (cardAx.answersList[userTryToAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[p])
+                    if (cardAx.answersList[userTry - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[p])
                     {
                         keepCountOfCorrectAnswers++;
                         break;
@@ -353,10 +350,10 @@ namespace QuizMaker
         /// </summary>
         /// <param name="finalScore"></param>
         /// <param name="supposedCorrectAnswers"></param>
-        public static void SetPassOrFail(double finalScore, double supposedCorrectAnswers)
+        public static void SetPassOrFail(float finalScore, float supposedCorrectAnswers)
         {
             int passGrade = 80;
-            double percentageRetreived = finalScore*100/supposedCorrectAnswers;
+            float percentageRetreived = finalScore * 100 / supposedCorrectAnswers;
             if (percentageRetreived >= passGrade)
                 Console.WriteLine($"Passed! Your score is: {percentageRetreived}%");
             else
