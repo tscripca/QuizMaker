@@ -224,7 +224,8 @@ namespace QuizMaker
                 Console.WriteLine($"{Const.BUILD_MODE} - Build game.");
                 Console.WriteLine($"{Const.PLAY_MODE} - Play game.");
                 char userSelectsGameMode = default;
-                userSelectsGameMode = ValidateInputFormatChar(userSelectsGameMode);
+                string usrGameMod = default;
+                userSelectsGameMode = ValidateInputFormatChar(usrGameMod);
                 switch (userSelectsGameMode)
                 {
                     case Const.BUILD_MODE: myGameMode = GameMode.build; BuildTheGame(); break;
@@ -248,19 +249,18 @@ namespace QuizMaker
         /// </summary>
         /// <param name="userInput"></param>
         /// <returns>Char</returns>
-        public static char ValidateInputFormatChar(char userInput)
+        public static char ValidateInputFormatChar(string userInput)
         {
-            try
+            bool validInput = false;
+            char newChar = default;
+            while(!validInput)
             {
-                userInput = Convert.ToChar(Console.ReadLine());
-                ClearScreen();
+                userInput = Console.ReadLine();
+                validInput = char.TryParse(userInput, out newChar);
+                if(!validInput)
+                    Console.WriteLine("Try again!");
             }
-            catch (Exception invalidFormat)
-            {
-                Console.WriteLine(invalidFormat.Message);
-                ClearScreen();
-            }
-            return userInput;
+            return newChar;
         }
         /// <summary>
         /// Code block where user is playing the game.
