@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.Json.Serialization.Metadata;
 namespace QuizMaker
 {
     public class UIMethods
@@ -47,10 +48,11 @@ namespace QuizMaker
         /// <returns>An integer</returns>
         public static int SetNoOfAnswersPerEachQuestion()
         {
-            string answersPerQuestion = " ";
+            int validInput = 0;
+            string userInput = default;
             Console.WriteLine("Answers per each question?");
-            int ansXQst = ValidateInputFormatInt(answersPerQuestion);
-            return ansXQst;
+            validInput = ValidateInputFormatInt(userInput);
+            return validInput;
         }
         /// <summary>
         /// Validates user input for int values only.
@@ -65,7 +67,7 @@ namespace QuizMaker
             {
                 userDataIn = Console.ReadLine();
                 validFormat = int.TryParse(userDataIn, out newVar);
-                if(!validFormat)
+                if (!validFormat)
                     Console.WriteLine("Only numbers please, try again!");
             }
             return newVar;
@@ -154,9 +156,10 @@ namespace QuizMaker
         /// </summary>
         public static void BuildTheGame()
         {
+            int numberOfAnswersPerQuestion = 0;
             var theMainQuizz = new List<QuizzGame>();
             int numberOfQuestions = SetTotalNoOfQuestions();
-            int numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
+            numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
             ClearScreen();
             CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
             Logic.ExportToDrive(theMainQuizz);
@@ -175,6 +178,7 @@ namespace QuizMaker
             int howManyCorrAns = 0;
             bool indexRangeCorrect = false;
             bool correctNumOfAnsw = false;
+            bool correctNumOfOptions = false;
             //check for indexOfAnswers out of range.
             while (!indexRangeCorrect)
             {
@@ -189,26 +193,32 @@ namespace QuizMaker
                     else Console.WriteLine("Try again: ");
                 }
                 Console.WriteLine("Select answers: ");
-                try
+                //The increment variable has been moved so it increments only when you choose a correct option.
+                //If you type a value that is not available then the increment variable will stay to the last memmorized value.
+                for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < howManyCorrAns;)
                 {
-                    for (int i = 0; i < howManyCorrAns; i++)
+                    while (!correctNumOfOptions)
                     {
-                        correctAnswer = Convert.ToInt32(Console.ReadLine());
-                        QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - Const.INDEX_ONE]);
-                        listOfIndexes.Add(correctAnswer);
+                        correctAnswer = ValidateInputFormatInt(howManyCorrectAnswers);
+                        if (correctAnswer > listOfUserAnswers.Count)
+                        {
+                            Console.WriteLine($"Value too high, max {listOfUserAnswers.Count}");
+                        }
+                        else
+                        {
+                            QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - Const.INDEX_ONE]);
+                            listOfIndexes.Add(correctAnswer);
+                            loopThroughCorrectAnswers++;
+                        }
+                        break;
                     }
-                    Console.WriteLine("Your selected answers are: ");
-                    for (int j = 0; j < QnACard.listOfcorrectAnswers.Count; j++)
-                    {
-                        Console.WriteLine($"{listOfIndexes[j]}) {QnACard.listOfcorrectAnswers[j]}");
-                    }
-                    indexRangeCorrect = true;
                 }
-                catch (Exception outOfRange)
+                Console.WriteLine("Your selected answers are: ");
+                for (int loopThroughListOfIndexes = 0; loopThroughListOfIndexes < QnACard.listOfcorrectAnswers.Count; loopThroughListOfIndexes++)
                 {
-                    Console.WriteLine(outOfRange.Message);
-                    indexRangeCorrect = false;
+                    Console.WriteLine($"{listOfIndexes[loopThroughListOfIndexes]}) {QnACard.listOfcorrectAnswers[loopThroughListOfIndexes]}");
                 }
+                indexRangeCorrect = true;
             }
             return QnACard.listOfcorrectAnswers;
         }
@@ -253,11 +263,11 @@ namespace QuizMaker
         {
             bool validInput = false;
             char newChar = default;
-            while(!validInput)
+            while (!validInput)
             {
                 userInput = Console.ReadLine();
                 validInput = char.TryParse(userInput, out newChar);
-                if(!validInput)
+                if (!validInput)
                     Console.WriteLine("Try again!");
             }
             return newChar;
@@ -329,7 +339,7 @@ namespace QuizMaker
             bool editText = true;
             while (!validFormat)
             {
-                Console.Write("Enter(Continue) or E(Edit) card: ");
+                Console.Write("Continue(Enter) or Edit(E) card: ");
                 try
                 {
                     ConsoleKeyInfo userpress = Console.ReadKey();
