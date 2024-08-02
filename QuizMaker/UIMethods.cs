@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.Json.Serialization.Metadata;
+using System.Security.Cryptography.X509Certificates;
 namespace QuizMaker
 {
     public class UIMethods
@@ -83,13 +84,12 @@ namespace QuizMaker
             string userQuestion = string.Empty;
             while (checkIfStringIsEmpty || retypeQuestion)
             {
-                //no need to type the question mark, it will be displayed in PlayGame mode.
-                Console.Write("Question: ");
+                //no need to type the question mark, it will be displayed in PlayGame mode.                
+                Console.Write($"Question : ");
                 userQuestion = Console.ReadLine();
-                if (userQuestion == string.Empty)
+                if (userQuestion == string.Empty || userQuestion == " ")
                 {
-                    checkIfStringIsEmpty = String.IsNullOrEmpty(userQuestion);
-                    ClearScreen();
+                    Console.WriteLine("Question is empty, try again!");
                 }
                 else checkIfStringIsEmpty = false;
                 if (userQuestion.Any(char.IsPunctuation))
@@ -313,19 +313,31 @@ namespace QuizMaker
         public static int KeepTrackOfAnswers(string userTryToAnswer, QuizzGame cardAx)
         {
             int keepCountOfCorrectAnswers = 0;
-            int userTry = 0;
-            for (int k = 0; k < cardAx.listOfcorrectAnswers.Count; k++)
+            int userPickAnswer = 0;
+            for (int bulletNoForCorrectAnsw = 0; bulletNoForCorrectAnsw < cardAx.listOfcorrectAnswers.Count; bulletNoForCorrectAnsw++)
             {
-                Console.Write($"Answer {k + Const.INDEX_ONE}: ");
-                userTry = ValidateInputFormatInt(userTryToAnswer);
+                bool indexExists = true;
+                Console.Write($"Answer {bulletNoForCorrectAnsw + Const.INDEX_ONE}: ");
+                userPickAnswer = ValidateInputFormatInt(userTryToAnswer);
                 //comparing user choice with the list of correct answers to see if there is a match.
-                for (int p = 0; p < cardAx.listOfcorrectAnswers.Count; p++)
+                //also check if the user selection in this case is not higher than the existing values.
+                while(indexExists)
                 {
-                    if (cardAx.answersList[userTry - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[p])
+                    if(userPickAnswer > cardAx.answersList.Count)
                     {
-                        keepCountOfCorrectAnswers++;
+                        Console.WriteLine("Out of range, try again!");
+                        bulletNoForCorrectAnsw--;
                         break;
                     }
+                    for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < cardAx.listOfcorrectAnswers.Count; loopThroughCorrectAnswers++)
+                    {
+                        if (cardAx.answersList[userPickAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[loopThroughCorrectAnswers])
+                        {                            
+                            keepCountOfCorrectAnswers++;
+                            break;
+                        }                          
+                    }
+                    break;
                 }
             }
             Console.WriteLine($"You have {keepCountOfCorrectAnswers} correct answers.");
