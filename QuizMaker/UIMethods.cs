@@ -321,9 +321,9 @@ namespace QuizMaker
                 userPickAnswer = ValidateInputFormatInt(userTryToAnswer);
                 //comparing user choice with the list of correct answers to see if there is a match.
                 //also check if the user selection in this case is not higher than the existing values.
-                while(indexExists)
+                while (indexExists)
                 {
-                    if(userPickAnswer > cardAx.answersList.Count)
+                    if (userPickAnswer > cardAx.answersList.Count)
                     {
                         Console.WriteLine("Out of range, try again!");
                         bulletNoForCorrectAnsw--;
@@ -332,10 +332,10 @@ namespace QuizMaker
                     for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < cardAx.listOfcorrectAnswers.Count; loopThroughCorrectAnswers++)
                     {
                         if (cardAx.answersList[userPickAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[loopThroughCorrectAnswers])
-                        {                            
+                        {
                             keepCountOfCorrectAnswers++;
                             break;
-                        }                          
+                        }
                     }
                     break;
                 }
@@ -351,21 +351,15 @@ namespace QuizMaker
         {
             bool validFormat = false;
             bool editText = true;
+            char userEditText = default;
             while (!validFormat)
             {
-                Console.Write("Continue(Enter) or Edit(E) card: ");
-                try
-                {
-                    ConsoleKeyInfo userpress = Console.ReadKey();
-                    char userInput = userpress.KeyChar;
-                    Console.WriteLine();
-                    if (userInput == 'e') { Console.Write("Edit "); validFormat = true; editText = true; }
-                    if (userpress.Key == ConsoleKey.Enter) { validFormat = true; editText = false; }
-                }
-                catch (Exception invalidFormat)
-                {
-                    Console.WriteLine(invalidFormat.Message);
-                }
+                Console.Write("Continue(C) or Edit(E) card: ");
+                string userChoice = default;
+                userEditText = ValidateInputFormatChar(userChoice);
+                if (userEditText == 'e') { editText = true; break; }
+                else if (userEditText == 'c') { editText = false; break; }
+                else Console.WriteLine("Try again!");
             }
             return editText;
         }
