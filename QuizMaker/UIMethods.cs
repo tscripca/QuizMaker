@@ -101,27 +101,29 @@ namespace QuizMaker
             return userQuestion;
         }
         /// <summary>
-        /// Stores answers for each question in a list.
+        /// Stores the answers for each question in a list of strings.
         /// </summary>
         /// <returns>A list of strings.</returns>
         public static List<string> SetUserAnswers(int selectNoOfAnswers)
         {
             var gameCard = new QuizzGame();
             string userAnswer = string.Empty;
-            bool checkIfAnswerIsEmpty = true;
-            bool retypeAnswer = true;
+            //bool retypeAnswer = true;
             List<string> answersList = new List<string>();
             Console.WriteLine("Answers: ");
             for (int answCount = 0; answCount < selectNoOfAnswers; answCount++)
             {
-                Console.Write($"{answCount + Const.INDEX_ONE}) ");
-                while (checkIfAnswerIsEmpty || retypeAnswer)
+                bool checkIfAnswerIsEmpty = true;
+                while (checkIfAnswerIsEmpty)
                 {
+                    Console.Write($"{answCount + Const.INDEX_ONE}) ");
                     userAnswer = Console.ReadLine();
-                    if (userAnswer == string.Empty)
-                        Console.WriteLine("Answer is empty!");
+                    if (userAnswer == string.Empty || userAnswer == " ")
+                        Console.WriteLine("Answer is empty, try again!");
                     else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
-                        Console.WriteLine("Contains strange characters.");
+                        Console.WriteLine("Contains strange characters, try again!");
+                    else if (answersList.Contains(userAnswer))
+                        Console.WriteLine("Duplicate answer, try again!");
                     else { answersList.Add(userAnswer); checkIfAnswerIsEmpty = false; break; }
                 }
             }
@@ -299,7 +301,7 @@ namespace QuizMaker
                 supposedAnswers += gameCard.listOfcorrectAnswers.Count;
             }
             AddEmptyLine();
-            SetPassOrFail(totalScore, supposedAnswers);
+            SetGradePassOrFail(totalScore, supposedAnswers);
             Console.WriteLine($"You've answered {totalScore} out of {supposedAnswers}");
         }
         /// <summary>
@@ -360,10 +362,10 @@ namespace QuizMaker
         /// </summary>
         /// <param name="finalScore"></param>
         /// <param name="supposedCorrectAnswers"></param>
-        public static void SetPassOrFail(float finalScore, float supposedCorrectAnswers)
+        public static void SetGradePassOrFail(int finalScore, int supposedCorrectAnswers)
         {
             int passGrade = 80;
-            float percentageRetreived = finalScore * 100 / supposedCorrectAnswers;
+            int percentageRetreived = finalScore * 100 / supposedCorrectAnswers;
             if (percentageRetreived >= passGrade)
                 Console.WriteLine($"Passed! Your score is: {percentageRetreived}%");
             else
