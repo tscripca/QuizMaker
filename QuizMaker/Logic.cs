@@ -1,11 +1,4 @@
-﻿using System;
-using System.IO;
-using QuizMaker;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Xml.Serialization;
 
 namespace QuizMaker
 {

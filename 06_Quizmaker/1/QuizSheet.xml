@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfQuiz xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Quiz>
+    <quizQuestion>Who Was God?</quizQuestion>
+    <Answers>
+      <string>Programmer*</string>
+      <string>Gamer</string>
+      <string>Man</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>Who was the first known Programmer?</quizQuestion>
+    <Answers>
+      <string>lady from 1800s*</string>
+      <string>Mussolini</string>
+      <string>Tito</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>Who Crossed The river?</quizQuestion>
+    <Answers>
+      <string>John</string>
+      <string>Eric*</string>
+      <string>Adam</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>Who Crossed The River?</quizQuestion>
+    <Answers>
+      <string>Johnny</string>
+      <string>Benny*</string>
+      <string>Eric</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>Who reset the alarm a million times?</quizQuestion>
+    <Answers>
+      <string>Björn</string>
+      <string>Johnny*</string>
+      <string>Adam</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>who crossed the river</quizQuestion>
+    <Answers>
+      <string>johnny</string>
+      <string>adam</string>
+      <string>benny*</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>aefaef</quizQuestion>
+    <Answers>
+      <string>aef*</string>
+      <string>aefaef*</string>
+      <string>aefaefaef*</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>200</quizQuestion>
+    <Answers>
+      <string>2</string>
+      <string>2*</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>aefaef</quizQuestion>
+    <Answers>
+      <string>aefaef</string>
+      <string>aefaef*</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>aefaefaef</quizQuestion>
+    <Answers>
+      <string>aefaef*</string>
+      <string>aefaef</string>
+    </Answers>
+  </Quiz>
+  <Quiz>
+    <quizQuestion>1</quizQuestion>
+    <Answers>
+      <string>3*</string>
+      <string>24</string>
+    </Answers>
+  </Quiz>
+</ArrayOfQuiz>

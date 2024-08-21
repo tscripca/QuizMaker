@@ -1,13 +1,4 @@
-﻿using System;
-using System.IO;
-using QuizMaker;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text.Json.Serialization.Metadata;
-using System.Security.Cryptography.X509Certificates;
-namespace QuizMaker
+﻿namespace QuizMaker
 {
     public class UIMethods
     {
@@ -85,7 +76,7 @@ namespace QuizMaker
             while (checkIfStringIsEmpty || retypeQuestion)
             {
                 //no need to type the question mark, it will be displayed in PlayGame mode.                
-                Console.Write($"Question : ");
+                Console.Write("Question : ");
                 userQuestion = Console.ReadLine();
                 if (userQuestion == string.Empty || userQuestion == " ")
                 {
@@ -109,7 +100,7 @@ namespace QuizMaker
             var gameCard = new QuizzGame();
             string userAnswer = string.Empty;
             //bool retypeAnswer = true;
-            List<string> answersList = new List<string>();
+            List<string> answersList = [];
             Console.WriteLine("Answers: ");
             for (int answCount = 0; answCount < selectNoOfAnswers; answCount++)
             {

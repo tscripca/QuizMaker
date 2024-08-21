@@ -1,0 +1,682 @@
+<?xml version="1.0"?>
+<ArrayOfQnA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <QnA>
+    <Question>Who was elected President of United States in 2017?</Question>
+    <Answers>
+      <string>Donald Trump</string>
+      <string>Barack Obama</string>
+      <string>George Bush</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>When did Jonas Brothers make their comeback to music world?</Question>
+    <Answers>
+      <string>2015</string>
+      <string>2011</string>
+      <string>2017</string>
+      <string>2019</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is national language of Canada?</Question>
+    <Answers>
+      <string>English</string>
+      <string>Dutch</string>
+      <string>French</string>
+      <string>English and French</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the national animal of Pakistan?</Question>
+    <Answers>
+      <string>Peacock</string>
+      <string>Markhor</string>
+      <string>Lion</string>
+      <string>Elephant</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>A la Crecy is a French dish made of what?</Question>
+    <Answers>
+      <string>Apples</string>
+      <string>Carrots</string>
+      <string>Potatoes</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What native country is Brazil?</Question>
+    <Answers>
+      <string>South American</string>
+      <string>North American</string>
+      <string>West American</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which core ingredient is important to cook a savory dish?</Question>
+    <Answers>
+      <string>Salt</string>
+      <string>butter</string>
+      <string>Sugar</string>
+      <string>Honey</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Brazil is the biggest producer of?</Question>
+    <Answers>
+      <string>Rice</string>
+      <string>Oil</string>
+      <string>Coal</string>
+      <string>Coffee</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Saudi Arabia is the biggest producer of?</Question>
+    <Answers>
+      <string>Rice</string>
+      <string>Oil</string>
+      <string>Coal</string>
+      <string>Coffee</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which country is infamously known as Arch Rival of Pakistan?</Question>
+    <Answers>
+      <string>Afghanistan</string>
+      <string>America</string>
+      <string>India</string>
+      <string>China</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>How many colors in the Rainbow?</Question>
+    <Answers>
+      <string>One</string>
+      <string>Five</string>
+      <string>ten</string>
+      <string>seven</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is ingredient found in traditional garam masala spice?</Question>
+    <Answers>
+      <string>Turmeric</string>
+      <string>Red chili powder</string>
+      <string>Salt</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which religion believes in One God and Last Prophet Muhammad?</Question>
+    <Answers>
+      <string>Islam</string>
+      <string>Hinduism</string>
+      <string>Sanskrit</string>
+      <string>Buddhism</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which religion has a God specified for each Rain, Money, Children and Love?</Question>
+    <Answers>
+      <string>Islam</string>
+      <string>Hinduism</string>
+      <string>Sanskrit</string>
+      <string>Buddhism</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the currency of Pakistan?</Question>
+    <Answers>
+      <string>Pound</string>
+      <string>Rupee</string>
+      <string>Riyal</string>
+      <string>Euro</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the currency of India?</Question>
+    <Answers>
+      <string>Pound</string>
+      <string>Rupee</string>
+      <string>Riyal</string>
+      <string>Euro</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the currency of Qatar?</Question>
+    <Answers>
+      <string>Pound</string>
+      <string>Rupee</string>
+      <string>Riyal</string>
+      <string>Euro</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the currency of UK?</Question>
+    <Answers>
+      <string>Pound</string>
+      <string>Rupee</string>
+      <string>Riyal</string>
+      <string>Euro</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What term is used for sweet dishes in English?</Question>
+    <Answers>
+      <string>Savory</string>
+      <string>Sour</string>
+      <string>Sweet</string>
+      <string>Dessert</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What does independence mean?</Question>
+    <Answers>
+      <string>Free will</string>
+      <string>Permission</string>
+      <string>Freedom</string>
+      <string>Goodwill</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is tomato?</Question>
+    <Answers>
+      <string>Fruit</string>
+      <string>Vegetable</string>
+      <string>Herb</string>
+      <string>Spice</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Disney show was Miley Cyrus part of?</Question>
+    <Answers>
+      <string>Hannah Montanna</string>
+      <string>Live it like Beckham</string>
+      <string>two Broke Girls</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Ancient Egyptian Houses were built of what?</Question>
+    <Answers>
+      <string>Mud</string>
+      <string>Wood</string>
+      <string>Brick</string>
+      <string>Stone</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What fabric is made of flax?</Question>
+    <Answers>
+      <string>Cotton</string>
+      <string>Linen</string>
+      <string>Lawn</string>
+      <string>Velvet</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the most common drink in Europe?</Question>
+    <Answers>
+      <string>Water</string>
+      <string>Beer</string>
+      <string>Wine</string>
+      <string>Vodka</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is a common footwear worn by ancient people?</Question>
+    <Answers>
+      <string>Leather sandals</string>
+      <string>Cloth sandals</string>
+      <string>Rubber boots</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is a great remedy for weight loss?</Question>
+    <Answers>
+      <string>Drinking green tea</string>
+      <string>Drinking black tea</string>
+      <string>Drinking diet soda</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is a fat booster workout?</Question>
+    <Answers>
+      <string>Speed walk</string>
+      <string>Lying down straight on the back</string>
+      <string>Weight lifting</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is a helpful remedy for stomach ache?</Question>
+    <Answers>
+      <string>Mint leaves</string>
+      <string>Green chili</string>
+      <string>Hazelnuts</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which two colors mix to form pink?</Question>
+    <Answers>
+      <string>Grey and red</string>
+      <string>white and orange</string>
+      <string>White and Red</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the most popular baby boy name in Britain?</Question>
+    <Answers>
+      <string>George</string>
+      <string>Arthur</string>
+      <string>William</string>
+      <string>Charles</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>When did Prince William and Kate Middleton get married?</Question>
+    <Answers>
+      <string>2010</string>
+      <string>2011</string>
+      <string>2012</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Who is next in line to the British kingdom?</Question>
+    <Answers>
+      <string>Prince Harry</string>
+      <string>Prince William</string>
+      <string>Prince George</string>
+      <string>Prince Charles</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the capital city of Pakistan?</Question>
+    <Answers>
+      <string>Lahore</string>
+      <string>Karachi</string>
+      <string>Islamabad</string>
+      <string>Quetta</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the capital city of India?</Question>
+    <Answers>
+      <string>Mumbai</string>
+      <string>New Delhi</string>
+      <string>Calcutta</string>
+      <string>Pune</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is known as the city of lights in Pakistan?</Question>
+    <Answers>
+      <string>Lahore</string>
+      <string>Karachi</string>
+      <string>Islamabad</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Times Square is located famously in which popular city of United States of America?</Question>
+    <Answers>
+      <string>New York</string>
+      <string>Washington</string>
+      <string>Texas</string>
+      <string>Philadelphia</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which music song was on top of hit list throughout the year 2016?</Question>
+    <Answers>
+      <string>One dance</string>
+      <string>Lap dance</string>
+      <string>Love story</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>How many planets in the universe?</Question>
+    <Answers>
+      <string>Five</string>
+      <string>Ten</string>
+      <string>nine</string>
+      <string>eight</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the closest planet to earth?</Question>
+    <Answers>
+      <string>Mars</string>
+      <string>Jupiter</string>
+      <string>Saturn</string>
+      <string>Pluto</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>In 2016, Game of Thrones resurrected which famous and popular character?</Question>
+    <Answers>
+      <string>Jon Snow</string>
+      <string>Bad Snow</string>
+      <string>Oliver Snow</string>
+      <string>Ben Snow</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>In 2016, which new type of chocolate was discovered?</Question>
+    <Answers>
+      <string>Ruby chocolate</string>
+      <string>Emerald chocolate</string>
+      <string>Diamond chocolate</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Who was elected the vice president of the United States of America in 2016?</Question>
+    <Answers>
+      <string>Mike Pence</string>
+      <string>Mike Fence</string>
+      <string>Mike Tense</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Hollywood actor won the prestigious best actor OSCAR award in 2016?</Question>
+    <Answers>
+      <string>Johnny Depp</string>
+      <string>Leonardo Di Caprio</string>
+      <string>Matt Demon</string>
+      <string>Tom Cruise</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Who is the richest man of India?</Question>
+    <Answers>
+      <string>Ratan Tata</string>
+      <string>Mukesh Ambani</string>
+      <string>Anil Ambani</string>
+      <string>Amitabh Bachan</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Indian Actress is also credited as world’s most beautiful woman?</Question>
+    <Answers>
+      <string>Deepika Padukone</string>
+      <string>Priety Zinta</string>
+      <string>Aishwarya Rai</string>
+      <string>Kareena Kapoor</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Ellen Pompe stars in which popular A-list Television show?</Question>
+    <Answers>
+      <string>Two broke girls</string>
+      <string>Grey’s Anatomy</string>
+      <string>How I met your mother</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Joey is the popular character of which television series?</Question>
+    <Answers>
+      <string>How I met your mother</string>
+      <string>Friends</string>
+      <string>Rampage</string>
+      <string>Game of thrones</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Jon Snow is a popular character of which television series?</Question>
+    <Answers>
+      <string>How I met your mother</string>
+      <string>Friends</string>
+      <string>Rampage</string>
+      <string>Game of thrones</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Queen Elizabeth III has been reigning on the British Royal Kingdom as Queen for how many years?</Question>
+    <Answers>
+      <string>50</string>
+      <string>60</string>
+      <string>70</string>
+      <string>80</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the most popular social media network?</Question>
+    <Answers>
+      <string>Facebook</string>
+      <string>Instagram</string>
+      <string>Twitter</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What pulls the sea water with its gravitational force?</Question>
+    <Answers>
+      <string>Moon</string>
+      <string>Sun</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the seventh planet from the sun?</Question>
+    <Answers>
+      <string>Uranus</string>
+      <string>Mercury</string>
+      <string>Pluto</string>
+      <string>Mars</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the fourth planet from the sun?</Question>
+    <Answers>
+      <string>Uranus</string>
+      <string>Mercury</string>
+      <string>Pluto</string>
+      <string>Mars</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which is the second planet from the earth?</Question>
+    <Answers>
+      <string>Uranus</string>
+      <string>Mercury</string>
+      <string>Pluto</string>
+      <string>Mars</string>
+    </Answers>
+    <CorrectAnswer>3</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the term ‘Lexicon’ used for?</Question>
+    <Answers>
+      <string>Dictionary</string>
+      <string>Book</string>
+      <string>Calculator</string>
+      <string>Diary</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which Muslim name means purity?</Question>
+    <Answers>
+      <string>Maryam</string>
+      <string>Zainab</string>
+      <string>Fatima</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>What is the Capital of Spain?</Question>
+    <Answers>
+      <string>Madrid</string>
+      <string>Athens</string>
+      <string>Barcelona</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Indian Ace Cricketer got married in 2017?</Question>
+    <Answers>
+      <string>Rahul Dravid</string>
+      <string>Virat Kohli</string>
+      <string>Harbajan Singh</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Indian actress did Virat Kohli get married to in 2017?</Question>
+    <Answers>
+      <string>Anushka Sharma</string>
+      <string>Deepika Padokune</string>
+      <string>Amrita Arora</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>In which Hollywood movie did the actor Bill Paxton portray the role of Fred Haise?</Question>
+    <Answers>
+      <string>Apollo 11</string>
+      <string>Apollo 17</string>
+      <string>Apollo 10</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>1 million people in the UK signed a petition in 2017 to stop which president from entering their country?</Question>
+    <Answers>
+      <string>Donald Trump</string>
+      <string>Nawaz Sharif</string>
+      <string>Narender Singh Modi</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Who won the Grammy best singer and album award in 2017?</Question>
+    <Answers>
+      <string>Adele</string>
+      <string>Beyonce</string>
+      <string>Lady Gaga</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Beyonce gave birth to twins; boy and girl in which year?</Question>
+    <Answers>
+      <string>2016</string>
+      <string>2017</string>
+      <string>2018</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Where do plants get nutrients?</Question>
+    <Answers>
+      <string>Animal wastes</string>
+      <string>Animal skin</string>
+      <string>Animal breath</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which religion existed in Egypt?</Question>
+    <Answers>
+      <string>Polytheism</string>
+      <string>Monotheism</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Who was elected the prime minister of Pakistan in 2018?</Question>
+    <Answers>
+      <string>Imran Khan</string>
+      <string>Nawaz Sharif</string>
+      <string>Bilawal Bhutto</string>
+      <string>Shahbaz Sharif</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which revolutionary march made feminism prominent in Pakistan?</Question>
+    <Answers>
+      <string>Mard March</string>
+      <string>Feminist March</string>
+      <string>Aurat March</string>
+      <string>Lady march</string>
+    </Answers>
+    <CorrectAnswer>2</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Which popular Bollywood couple got married in 2018?</Question>
+    <Answers>
+      <string>Aishwariya and Abhishek</string>
+      <string>Deepika and Ranveer</string>
+      <string>Anushka and Virat</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Avengers; Infinity wars was released in which month of 2018?</Question>
+    <Answers>
+      <string>December</string>
+      <string>November</string>
+      <string>June</string>
+      <string>October</string>
+    </Answers>
+    <CorrectAnswer>1</CorrectAnswer>
+  </QnA>
+  <QnA>
+    <Question>Huawei launched its y9 (2019) model in which month of 2018?</Question>
+    <Answers>
+      <string>December</string>
+      <string>January</string>
+      <string>June</string>
+      <string>October</string>
+    </Answers>
+    <CorrectAnswer>0</CorrectAnswer>
+  </QnA>
+</ArrayOfQnA>
