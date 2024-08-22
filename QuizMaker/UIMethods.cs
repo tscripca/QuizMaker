@@ -27,23 +27,23 @@
         /// Sets the number of questions the game will have.
         /// </summary>
         /// <returns>An integer</returns>
-        public static int SetTotalNoOfQuestions()
+        public static int SetNoOfQuestions()
         {
             string numOfQst = default;
             Console.WriteLine("How many questions?");
-            int numberOfQuestions = ValidateInputFormatInt(numOfQst);
+            int numberOfQuestions = ValidateInputInt(numOfQst);
             return numberOfQuestions;
         }
         /// <summary>
         /// Sets the number of answers per each question.
         /// </summary>
         /// <returns>An integer</returns>
-        public static int SetNoOfAnswersPerEachQuestion()
+        public static int SetNoOfAnsXQuestion()
         {
             int validInput = 0;
             string userInput = default;
             Console.WriteLine("Answers per each question?");
-            validInput = ValidateInputFormatInt(userInput);
+            validInput = ValidateInputInt(userInput);
             return validInput;
         }
         /// <summary>
@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="userDataIn"></param>
         /// <returns>An integer value!</returns>
-        public static int ValidateInputFormatInt(string userDataIn)
+        public static int ValidateInputInt(string userDataIn)
         {
             bool validFormat = false;
             int newVar = 0;
@@ -139,7 +139,7 @@
                     QnACard.quizzQuestion = AskUserQuestion();
                     QnACard.answersList = SetUserAnswers(numOfAnswXQuestion);
                     QnACard.listOfcorrectAnswers = GetCorrectAnswer(QnACard.answersList);
-                    userWantstoEditText = EditText();
+                    userWantstoEditText = EditQnACard();
                 }
                 mainGameList.Add(QnACard);
             }
@@ -151,8 +151,8 @@
         {
             int numberOfAnswersPerQuestion = 0;
             var theMainQuizz = new List<QuizzGame>();
-            int numberOfQuestions = SetTotalNoOfQuestions();
-            numberOfAnswersPerQuestion = SetNoOfAnswersPerEachQuestion();
+            int numberOfQuestions = SetNoOfQuestions();
+            numberOfAnswersPerQuestion = SetNoOfAnsXQuestion();
             ClearScreen();
             CreateDeckOfCards(theMainQuizz, numberOfQuestions, numberOfAnswersPerQuestion);
             Logic.ExportToDrive(theMainQuizz);
@@ -178,7 +178,7 @@
                 Console.Write("How many correct answers?: ");
                 while (!correctNumOfAnsw)
                 {
-                    howManyCorrAns = ValidateInputFormatInt(howManyCorrectAnswers);
+                    howManyCorrAns = ValidateInputInt(howManyCorrectAnswers);
                     if (howManyCorrAns <= listOfUserAnswers.Count)
                     {
                         correctNumOfAnsw = true;
@@ -192,7 +192,7 @@
                 {
                     while (!correctNumOfOptions)
                     {
-                        correctAnswer = ValidateInputFormatInt(howManyCorrectAnswers);
+                        correctAnswer = ValidateInputInt(howManyCorrectAnswers);
                         if (correctAnswer > listOfUserAnswers.Count)
                         {
                             Console.WriteLine($"Value too high, max {listOfUserAnswers.Count}");
@@ -228,7 +228,7 @@
                 Console.WriteLine($"{Const.PLAY_MODE} - Play game.");
                 char userSelectsGameMode = default;
                 string usrGameMod = default;
-                userSelectsGameMode = ValidateInputFormatChar(usrGameMod);
+                userSelectsGameMode = ValidateInputChar(usrGameMod);
                 switch (userSelectsGameMode)
                 {
                     case Const.BUILD_MODE: myGameMode = GameMode.build; BuildTheGame(); break;
@@ -252,7 +252,7 @@
         /// </summary>
         /// <param name="userInput"></param>
         /// <returns>Char</returns>
-        public static char ValidateInputFormatChar(string userInput)
+        public static char ValidateInputChar(string userInput)
         {
             bool validInput = false;
             char newChar = default;
@@ -290,6 +290,7 @@
                 }
                 totalScore += KeepTrackOfAnswers(userSelectedAnswer, gameCard);
                 supposedAnswers += gameCard.listOfcorrectAnswers.Count;
+                PressKey();
             }
             AddEmptyLine();
             SetGradePassOrFail(totalScore, supposedAnswers);
@@ -309,7 +310,7 @@
             {
                 bool indexExists = true;
                 Console.Write($"Answer {bulletNoForCorrectAnsw + Const.INDEX_ONE}: ");
-                userPickAnswer = ValidateInputFormatInt(userTryToAnswer);
+                userPickAnswer = ValidateInputInt(userTryToAnswer);
                 //comparing user choice with the list of correct answers to see if there is a match.
                 //also check if the user selection in this case is not higher than the existing values.
                 while (indexExists)
@@ -338,16 +339,16 @@
         /// Allows to edit a game card before adding it to the deck.
         /// </summary>
         /// <returns>Boolean</returns>
-        public static bool EditText()
+        public static bool EditQnACard()
         {
             bool validFormat = false;
             bool editText = true;
-            char userEditText = default;
+            //char userEditText = default;
             while (!validFormat)
             {
                 Console.Write("Continue(C) or Edit(E) card: ");
                 string userChoice = default;
-                userEditText = ValidateInputFormatChar(userChoice);
+                char userEditText = ValidateInputChar(userChoice);
                 if (userEditText == 'e') { editText = true; break; }
                 else if (userEditText == 'c') { editText = false; break; }
                 else Console.WriteLine("Try again!");
