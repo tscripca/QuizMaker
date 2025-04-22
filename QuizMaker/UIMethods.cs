@@ -24,7 +24,7 @@
             Console.Clear();
         }
         /// <summary>
-        /// Sets the number of questions the game will have.
+        /// Sets the total number of questions that the game has.
         /// </summary>
         /// <returns>An integer</returns>
         public static int SetNoOfQuestions()
@@ -47,7 +47,7 @@
             return validInput;
         }
         /// <summary>
-        /// Validates user input for int values only.
+        /// Input validation for int only.
         /// </summary>
         /// <param name="userDataIn"></param>
         /// <returns>An integer value!</returns>
@@ -75,19 +75,15 @@
             string userQuestion = string.Empty;
             while (checkIfStringIsEmpty || retypeQuestion)
             {
-                //no need to type the question mark, it will be displayed in PlayGame mode.                
+                //no need to type the question mark, it will be displayed when you play the game.                
                 Console.Write("Question : ");
                 userQuestion = Console.ReadLine();
                 if (userQuestion == string.Empty || userQuestion == " ")
                 {
                     Console.WriteLine("Question is empty, try again!");
                 }
-                else checkIfStringIsEmpty = false;
-                if (userQuestion.Any(char.IsPunctuation))
-                {
-                    Console.WriteLine("Contains symbols.");
-                }
                 else retypeQuestion = false;
+                checkIfStringIsEmpty = false;
             }
             return userQuestion;
         }
@@ -111,8 +107,8 @@
                     userAnswer = Console.ReadLine();
                     if (userAnswer == string.Empty || userAnswer == " ")
                         Console.WriteLine("Answer is empty, try again!");
-                    else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
-                        Console.WriteLine("Contains strange characters, try again!");
+                    /*else if (userAnswer.Any(char.IsDigit) || userAnswer.Any(char.IsPunctuation))
+                        Console.WriteLine("Contains strange characters, try again!");*/
                     else if (answersList.Contains(userAnswer))
                         Console.WriteLine("Duplicate answer, try again!");
                     else { answersList.Add(userAnswer); checkIfAnswerIsEmpty = false; break; }
@@ -121,7 +117,7 @@
             return answersList;
         }
         /// <summary>
-        /// Method where the user creates the deck of QnA card.
+        /// Player creates the deck of cards.
         /// </summary>
         /// <param name="mainGameList"></param>
         /// <param name="numOfQuestions"></param>
@@ -166,7 +162,7 @@
         {
             var QnACard = new QuizzGame();
             var listOfIndexes = new List<int>();
-            int correctAnswer = 0;
+
             string howManyCorrectAnswers = default;
             int howManyCorrAns = 0;
             bool indexRangeCorrect = false;
@@ -187,16 +183,16 @@
                 }
                 Console.WriteLine("Select answers: ");
                 //The increment variable has been moved so it increments only when you choose a correct option.
-                //If you type a value that is not available then the increment variable will stay to the last memmorized value.
+                //If you type a value that is not available then the increment variable will keep its last stored value.
                 for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < howManyCorrAns;)
                 {
                     while (!correctNumOfOptions)
                     {
-                        correctAnswer = ValidateInputInt(howManyCorrectAnswers);
-                        if (correctAnswer > listOfUserAnswers.Count)
-                        {
+                        int correctAnswer = ValidateInputInt(howManyCorrectAnswers);
+                        if (listOfIndexes.Contains(correctAnswer))
+                            Console.WriteLine("Answer already taken, choose another option!");
+                        else if (correctAnswer > listOfUserAnswers.Count)
                             Console.WriteLine($"Value too high, max {listOfUserAnswers.Count}");
-                        }
                         else
                         {
                             QnACard.listOfcorrectAnswers.Add(listOfUserAnswers[correctAnswer - Const.INDEX_ONE]);
@@ -211,7 +207,7 @@
                 {
                     Console.WriteLine($"{listOfIndexes[loopThroughListOfIndexes]}) {QnACard.listOfcorrectAnswers[loopThroughListOfIndexes]}");
                 }
-                indexRangeCorrect = true;
+                indexRangeCorrect = true; 
             }
             return QnACard.listOfcorrectAnswers;
         }
@@ -306,9 +302,11 @@
         {
             int keepCountOfCorrectAnswers = 0;
             int userPickAnswer = 0;
+            List<int> pickedAnswers = new List<int>();
             for (int bulletNoForCorrectAnsw = 0; bulletNoForCorrectAnsw < cardAx.listOfcorrectAnswers.Count; bulletNoForCorrectAnsw++)
             {
                 bool indexExists = true;
+                int catchErrorIndex = 0;
                 Console.Write($"Answer {bulletNoForCorrectAnsw + Const.INDEX_ONE}: ");
                 userPickAnswer = ValidateInputInt(userTryToAnswer);
                 //comparing user choice with the list of correct answers to see if there is a match.
@@ -321,11 +319,31 @@
                         bulletNoForCorrectAnsw--;
                         break;
                     }
-                    for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < cardAx.listOfcorrectAnswers.Count; loopThroughCorrectAnswers++)
+                    else if (pickedAnswers.Contains(userPickAnswer))
                     {
-                        if (cardAx.answersList[userPickAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[loopThroughCorrectAnswers])
+                        Console.WriteLine("Already answered,choose another option!");
+                        bulletNoForCorrectAnsw--;
+                        break;
+                    }
+                    pickedAnswers.Add(userPickAnswer);
+                    try
+                    {
+                        for (int loopThroughCorrectAnswers = 0; loopThroughCorrectAnswers < cardAx.listOfcorrectAnswers.Count; loopThroughCorrectAnswers++)
                         {
-                            keepCountOfCorrectAnswers++;
+                            if (cardAx.answersList[userPickAnswer - Const.INDEX_ONE] == cardAx.listOfcorrectAnswers[loopThroughCorrectAnswers])
+                            {
+                                catchErrorIndex = userPickAnswer - Const.INDEX_ONE;
+                                keepCountOfCorrectAnswers++;
+                                break;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        if (catchErrorIndex <= 0)
+                        {
+                            Console.WriteLine("Must be greater than 0! Try again!");
+                            bulletNoForCorrectAnsw--;
                             break;
                         }
                     }
@@ -359,11 +377,11 @@
         /// Calculates the final score percentage and displays the result.
         /// </summary>
         /// <param name="finalScore"></param>
-        /// <param name="supposedCorrectAnswers"></param>
-        public static void SetGradePassOrFail(int finalScore, int supposedCorrectAnswers)
+        /// <param name="noOfCorrectAnswers"></param>
+        public static void SetGradePassOrFail(int finalScore, int noOfCorrectAnswers)
         {
             int passGrade = 80;
-            int percentageRetreived = finalScore * 100 / supposedCorrectAnswers;
+            int percentageRetreived = finalScore * 100 / noOfCorrectAnswers;
             if (percentageRetreived >= passGrade)
                 Console.WriteLine($"Passed! Your score is: {percentageRetreived}%");
             else
